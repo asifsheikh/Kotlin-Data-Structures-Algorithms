@@ -324,7 +324,7 @@ object ListSearching {
      */
     fun jumpSearch(nums: List<Int>, target: Int): Int {
         val n = nums.size
-        val step = kotlin.math.sqrt(n.toDouble()).toInt()
+        var step = kotlin.math.sqrt(n.toDouble()).toInt()
         var prev = 0
         
         // Finding the block where element is present
