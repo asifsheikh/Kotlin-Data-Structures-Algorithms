@@ -1,268 +1,146 @@
 package data_structure.arrays
 
 /**
- * ARRAY MODIFICATION ALGORITHMS
- *
- * Problem: Modify array elements in-place with various operations like setting, swapping, and reversing.
- *
- * Different modification operations:
- * 1. Set element at specific index
- * 2. Swap elements at two indices
- * 3. Reverse entire array or range
- * 4. Handle bounds checking and validation
- *
- * Example:
- * Array: [1, 2, 3, 4, 5]
- * Set element at index 2 to 10: [1, 2, 10, 4, 5]
- * Swap elements at indices 1 and 3: [1, 4, 10, 2, 5]
- * Reverse entire array: [5, 2, 10, 4, 1]
- *
- * Intuition:
- * - Always validate indices before modification
- * - Use in-place operations to avoid extra space
- * - Handle edge cases (empty array, invalid indices)
- * - Reverse operations can be done with two pointers
+ * ARRAY MODIFICATION - Quick Reference
+ * All Kotlin array modification methods in one place
  */
 
 object ArrayModification {
     
     /**
-     * Set Element at Index
-     *
-     * Problem: Set a value at a specific index in an array.
-     *
-     * Algorithm:
-     * 1. Check if index is within valid bounds
-     * 2. Set value if valid, return false otherwise
-     *
-     * Time Complexity: O(1) - Direct array access
-     * Space Complexity: O(1) - Constant extra space
+     * Basic Element Modification
+     * Standard array modification operations
      */
-    fun setElement(arr: IntArray, index: Int, value: Int): Boolean {
-        return if (index in arr.indices) {
-            arr[index] = value
-            true
-        } else false
-    }
-    
-    /**
-     * Swap Elements
-     *
-     * Problem: Swap elements at two different indices in an array.
-     *
-     * Algorithm:
-     * 1. Validate both indices
-     * 2. Use temporary variable or XOR swap
-     * 3. Exchange values at the indices
-     *
-     * Time Complexity: O(1)
-     * Space Complexity: O(1)
-     */
-    fun swapElements(arr: IntArray, i: Int, j: Int): Boolean {
-        return if (i in arr.indices && j in arr.indices) {
-            arr[i] = arr[j].also { arr[j] = arr[i] }
-            true
-        } else false
-    }
-    
-    /**
-     * Swap Elements (XOR Method)
-     *
-     * Problem: Swap elements without using temporary variable.
-     *
-     * Algorithm:
-     * 1. Use XOR properties: a ^ a = 0, a ^ 0 = a
-     * 2. a = a ^ b, b = a ^ b, a = a ^ b
-     * 3. This works only for integers
-     *
-     * Time Complexity: O(1)
-     * Space Complexity: O(1) - No extra space
-     */
-    fun swapElementsXOR(arr: IntArray, i: Int, j: Int): Boolean {
-        return if (i in arr.indices && j in arr.indices && i != j) {
-            arr[i] = arr[i] xor arr[j]
-            arr[j] = arr[i] xor arr[j]
-            arr[i] = arr[i] xor arr[j]
-            true
-        } else false
-    }
-    
-    /**
-     * Reverse Array
-     *
-     * Problem: Reverse the order of elements in an array.
-     *
-     * Algorithm:
-     * 1. Use two pointers (left and right)
-     * 2. Swap elements at left and right pointers
-     * 3. Move left pointer right, right pointer left
-     * 4. Continue until pointers meet
-     *
-     * Time Complexity: O(n) - We swap n/2 pairs
-     * Space Complexity: O(1) - In-place operation
-     */
-    fun reverseArray(arr: IntArray) {
-        var left = 0
-        var right = arr.size - 1
-        while (left < right) {
-            swapElements(arr, left, right)
-            left++
-            right--
-        }
-    }
-    
-    /**
-     * Reverse Array in Range
-     *
-     * Problem: Reverse elements within a specific range of an array.
-     *
-     * Algorithm:
-     * 1. Validate and adjust start and end indices
-     * 2. Use two pointers within the range
-     * 3. Swap elements until pointers meet
-     *
-     * Time Complexity: O(end - start) - We swap (end-start)/2 pairs
-     * Space Complexity: O(1) - In-place operation
-     */
-    fun reverseArrayInRange(arr: IntArray, start: Int, end: Int) {
-        var left = maxOf(0, start)
-        var right = minOf(arr.size - 1, end)
-        while (left < right) {
-            swapElements(arr, left, right)
-            left++
-            right--
-        }
-    }
-    
-    /**
-     * Reverse Array (Recursive)
-     *
-     * Problem: Reverse array using recursion.
-     *
-     * Algorithm:
-     * 1. Base case: if left >= right, return
-     * 2. Swap elements at left and right
-     * 3. Recursively reverse remaining elements
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n) - Recursion stack
-     */
-    fun reverseArrayRecursive(arr: IntArray) {
-        reverseArrayRecursiveHelper(arr, 0, arr.size - 1)
-    }
-    
-    private fun reverseArrayRecursiveHelper(arr: IntArray, left: Int, right: Int) {
-        if (left >= right) return
+    fun basicModification() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
         
-        swapElements(arr, left, right)
-        reverseArrayRecursiveHelper(arr, left + 1, right - 1)
-    }
-    
-    /**
-     * Reverse Array by Groups
-     *
-     * Problem: Reverse array in groups of specified size.
-     *
-     * Algorithm:
-     * 1. Process array in chunks of group size
-     * 2. Reverse each chunk individually
-     * 3. Handle last chunk if it's smaller than group size
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(1)
-     */
-    fun reverseArrayByGroups(arr: IntArray, groupSize: Int) {
-        val n = arr.size
-        for (i in 0 until n step groupSize) {
-            val end = minOf(i + groupSize - 1, n - 1)
-            reverseArrayInRange(arr, i, end)
-        }
-    }
-    
-    /**
-     * Reverse Array with Condition
-     *
-     * Problem: Reverse only elements that satisfy a condition.
-     *
-     * Algorithm:
-     * 1. Find all indices that satisfy condition
-     * 2. Reverse elements at those indices
-     * 3. Maintain relative order of other elements
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(k) - k elements satisfy condition
-     */
-    fun reverseArrayWithCondition(arr: IntArray, condition: (Int) -> Boolean) {
-        val indices = mutableListOf<Int>()
+        // === SET ELEMENTS ===
+        arr[0] = 10                                          // [10, 2, 3, 4, 5]
+        arr.set(1, 20)                                       // [10, 20, 3, 4, 5]
+        arr.fill(0)                                          // [0, 0, 0, 0, 0]
+        arr.fill(1, 1, 4)                                    // [0, 1, 1, 1, 0]
         
-        // Find indices that satisfy condition
-        for (i in arr.indices) {
-            if (condition(arr[i])) {
-                indices.add(i)
-            }
+        // === SWAP ELEMENTS ===
+        arr[0] = arr[1].also { arr[1] = arr[0] }            // Swap arr[0] and arr[1]
+        val temp = arr[2]; arr[2] = arr[3]; arr[3] = temp   // Traditional swap
+        arr[4] = arr[4] xor arr[0].also { arr[0] = arr[4] xor arr[0] }.also { arr[4] = arr[4] xor arr[0] } // XOR swap
+    }
+    
+    /**
+     * Array Reversal
+     * Different ways to reverse arrays
+     */
+    fun arrayReversal() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
+        
+        // === FULL REVERSE ===
+        arr.reverse()                                        // [5, 4, 3, 2, 1]
+        
+        // === RANGE REVERSE ===
+        arr.reverse(1, 4)                                    // [5, 2, 3, 4, 1]
+        
+        // === MANUAL REVERSE ===
+        var left = 0; var right = arr.size - 1
+        while (left < right) {
+            arr[left] = arr[right].also { arr[right] = arr[left] }
+            left++; right--
         }
         
-        // Reverse elements at those indices
-        var left = 0
-        var right = indices.size - 1
-        while (left < right) {
-            swapElements(arr, indices[left], indices[right])
-            left++
-            right--
+        // === REVERSE BY GROUPS ===
+        val groupSize = 2
+        for (i in 0 until arr.size step groupSize) {
+            val end = minOf(i + groupSize - 1, arr.size - 1)
+            arr.reverse(i, end + 1)
         }
     }
     
     /**
-     * Fill Array with Value
-     *
-     * Problem: Fill entire array with a specific value.
-     *
-     * Algorithm:
-     * 1. Traverse array and set each element to value
-     * 2. Use built-in fill method for efficiency
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(1)
+     * Array Rotation
+     * Rotating array elements
      */
-    fun fillArray(arr: IntArray, value: Int) {
-        arr.fill(value)
+    fun arrayRotation() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
+        
+        // === LEFT ROTATION ===
+        val k = 2
+        arr.reverse(0, k)                                    // Reverse first k elements
+        arr.reverse(k, arr.size)                             // Reverse remaining elements
+        arr.reverse()                                        // Reverse entire array
+        
+        // === RIGHT ROTATION ===
+        arr.reverse()                                        // Reverse entire array
+        arr.reverse(0, k)                                    // Reverse first k elements
+        arr.reverse(k, arr.size)                             // Reverse remaining elements
+        
+        // === SHIFT OPERATIONS ===
+        val shiftedLeft = arr.drop(k) + arr.take(k)          // Left shift by k
+        val shiftedRight = arr.takeLast(k) + arr.dropLast(k) // Right shift by k
     }
     
     /**
-     * Fill Array in Range
-     *
-     * Problem: Fill array elements within a specific range with a value.
-     *
-     * Algorithm:
-     * 1. Validate and adjust start and end indices
-     * 2. Set each element in range to the value
-     *
-     * Time Complexity: O(end - start)
-     * Space Complexity: O(1)
+     * Array Filling
+     * Different ways to fill arrays
      */
-    fun fillArrayInRange(arr: IntArray, start: Int, end: Int, value: Int) {
-        val startIndex = maxOf(0, start)
-        val endIndex = minOf(arr.size, end + 1)
-        for (i in startIndex until endIndex) {
-            arr[i] = value
-        }
+    fun arrayFilling() {
+        val arr = IntArray(5)
+        
+        // === BASIC FILL ===
+        arr.fill(42)                                         // [42, 42, 42, 42, 42]
+        arr.fill(0, 1, 4)                                    // [42, 0, 0, 0, 42]
+        
+        // === FILL WITH FUNCTION ===
+        for (i in arr.indices) arr[i] = i * 2                // [0, 2, 4, 6, 8]
+        
+        // === FILL WITH PATTERN ===
+        for (i in arr.indices) arr[i] = if (i % 2 == 0) 0 else 1 // [0, 1, 0, 1, 0]
+        
+        // === FILL WITH SEQUENCE ===
+        var value = 1
+        for (i in arr.indices) arr[i] = value++              // [1, 2, 3, 4, 5]
     }
     
     /**
-     * Fill Array with Function
-     *
-     * Problem: Fill array with values generated by a function.
-     *
-     * Algorithm:
-     * 1. Traverse array
-     * 2. Set each element to function(index)
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(1)
+     * Array Copying
+     * Different ways to copy arrays
      */
-    fun fillArrayWithFunction(arr: IntArray, function: (Int) -> Int) {
-        for (i in arr.indices) {
-            arr[i] = function(i)
-        }
+    fun arrayCopying() {
+        val original = intArrayOf(1, 2, 3, 4, 5)
+        
+        // === BASIC COPY ===
+        val copy1 = original.copyOf()                        // [1, 2, 3, 4, 5]
+        val copy2 = original.clone()                         // [1, 2, 3, 4, 5]
+        
+        // === COPY WITH SIZE ===
+        val largerCopy = original.copyOf(10)                 // [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
+        val smallerCopy = original.copyOf(3)                 // [1, 2, 3]
+        
+        // === COPY RANGE ===
+        val rangeCopy = original.copyOfRange(1, 4)           // [2, 3, 4]
+        
+        // === COPY INTO ===
+        val target = IntArray(5)
+        original.copyInto(target)                            // target = [1, 2, 3, 4, 5]
+        original.copyInto(target, 1, 0, 3)                  // target = [0, 1, 2, 3, 0]
+    }
+    
+    /**
+     * 2D Array Modification
+     * Modifying 2D arrays
+     */
+    fun twoDimensionalModification() {
+        val matrix = Array(3) { IntArray(3) { 0 } }
+        
+        // === SET ELEMENTS ===
+        matrix[0][0] = 1                                     // Set specific element
+        matrix[1].fill(5)                                    // Fill entire row
+        matrix.forEach { row -> row.fill(3) }                // Fill entire matrix
+        
+        // === ROW/COLUMN OPERATIONS ===
+        matrix[0] = intArrayOf(1, 2, 3)                     // Replace entire row
+        for (i in matrix.indices) matrix[i][1] = 10          // Set entire column
+        
+        // === MATRIX REVERSE ===
+        matrix.reverse()                                     // Reverse rows
+        matrix.forEach { it.reverse() }                      // Reverse each row
     }
 } 

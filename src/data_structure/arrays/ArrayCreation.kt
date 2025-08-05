@@ -1,355 +1,109 @@
 package data_structure.arrays
 
 /**
- * ARRAY CREATION ALGORITHMS
- *
- * Problem: Create arrays with different initialization patterns and configurations.
- *
- * Different creation methods:
- * 1. Create arrays with specific size and default values
- * 2. Create arrays from values or ranges
- * 3. Create arrays using functions or patterns
- * 4. Create 2D arrays and matrices
- * 5. Create special matrix patterns (identity, spiral, etc.)
- *
- * Example:
- * Create array with size 5: [0, 0, 0, 0, 0]
- * Create array with values: [1, 2, 3, 4, 5]
- * Create array with range: [1, 2, 3, 4, 5]
- * Create 2D array 3x3: [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
- *
- * Intuition:
- * - Use appropriate constructors for different needs
- * - Consider memory efficiency for large arrays
- * - Use functional programming for complex patterns
- * - Handle edge cases (negative sizes, invalid ranges)
+ * ARRAY CREATION - Quick Reference
+ * All Kotlin array creation methods in one place
  */
 
 object ArrayCreation {
     
     /**
-     * Create Array with Size
-     *
-     * Problem: Create an array of specified size with default values.
-     *
-     * Algorithm:
-     * 1. Use IntArray constructor with size
-     * 2. All elements are initialized to 0
-     *
-     * Time Complexity: O(n) - Initialize n elements
-     * Space Complexity: O(n) - Array of size n
+     * Primitive Array Creation
+     * All ways to create primitive arrays in Kotlin
      */
-    fun createArrayWithSize(size: Int): IntArray {
-        return IntArray(size)
+    fun primitiveArrays() {
+        // === INT ARRAYS ===
+        val emptyIntArray = IntArray(5)                    // [0, 0, 0, 0, 0]
+        val intArrayWithValues = intArrayOf(1, 2, 3, 4, 5) // [1, 2, 3, 4, 5]
+        val intArrayWithDefault = IntArray(5) { 10 }       // [10, 10, 10, 10, 10]
+        val intArrayWithFunction = IntArray(5) { it * 2 }  // [0, 2, 4, 6, 8]
+        val intArrayFromRange = (1..5).toList().toIntArray() // [1, 2, 3, 4, 5]
+        
+        // === OTHER PRIMITIVE ARRAYS ===
+        val booleanArray = BooleanArray(3) { true }        // [true, true, true]
+        val charArray = CharArray(3) { 'a' + it }          // ['a', 'b', 'c']
+        val longArray = LongArray(3) { it.toLong() }       // [0, 1, 2]
+        val floatArray = FloatArray(3) { it.toFloat() }    // [0.0, 1.0, 2.0]
+        val doubleArray = DoubleArray(3) { it.toDouble() } // [0.0, 1.0, 2.0]
+        val byteArray = ByteArray(3) { it.toByte() }       // [0, 1, 2]
+        val shortArray = ShortArray(3) { it.toShort() }    // [0, 1, 2]
     }
     
     /**
-     * Create Array with Values
-     *
-     * Problem: Create an array from a variable number of values.
-     *
-     * Algorithm:
-     * 1. Use vararg parameter to accept multiple values
-     * 2. Return array with provided values
-     *
-     * Time Complexity: O(n) - n is number of values
-     * Space Complexity: O(n) - Array of size n
+     * Generic Array Creation
+     * All ways to create generic arrays in Kotlin
      */
-    fun createArrayWithValues(vararg values: Int): IntArray {
-        return values
+    fun genericArrays() {
+        // === GENERIC ARRAYS ===
+        val stringArray = Array(3) { "item$it" }           // ["item0", "item1", "item2"]
+        val anyArray = arrayOf(1, "hello", true)           // [1, "hello", true]
+        val nullableArray = arrayOfNulls<String>(3)        // [null, null, null]
+        val typedArray = Array<String>(3) { "default" }    // ["default", "default", "default"]
+        
+        // === LIST TO ARRAY ===
+        val list = listOf(1, 2, 3, 4, 5)
+        val arrayFromList = list.toTypedArray()            // [1, 2, 3, 4, 5]
+        val intArrayFromList = list.toIntArray()           // [1, 2, 3, 4, 5]
     }
     
     /**
-     * Create Array with Default Value
-     *
-     * Problem: Create an array of specified size with a custom default value.
-     *
-     * Algorithm:
-     * 1. Use IntArray constructor with size and initializer function
-     * 2. Set each element to the default value
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
+     * 2D Array Creation
+     * All ways to create 2D arrays and matrices
      */
-    fun createArrayWithDefault(size: Int, defaultValue: Int): IntArray {
-        return IntArray(size) { defaultValue }
+    fun twoDimensionalArrays() {
+        // === 2D INT ARRAYS ===
+        val matrix2x3 = Array(2) { IntArray(3) }           // [[0, 0, 0], [0, 0, 0]]
+        val matrixWithDefault = Array(2) { IntArray(3) { 5 } } // [[5, 5, 5], [5, 5, 5]]
+        val matrixWithValues = arrayOf(intArrayOf(1, 2), intArrayOf(3, 4)) // [[1, 2], [3, 4]]
+        
+        // === 2D GENERIC ARRAYS ===
+        val stringMatrix = Array(2) { Array(3) { "x" } }   // [["x", "x", "x"], ["x", "x", "x"]]
+        val anyMatrix = arrayOf(arrayOf(1, "a"), arrayOf(2, "b")) // [[1, "a"], [2, "b"]]
+        
+        // === SPECIAL MATRICES ===
+        val identityMatrix = Array(3) { row -> IntArray(3) { col -> if (row == col) 1 else 0 } }
+        val spiralMatrix = createSpiralMatrix(3, 3)
     }
     
     /**
-     * Create Array with Function
-     *
-     * Problem: Create an array where each element is generated by a function.
-     *
-     * Algorithm:
-     * 1. Use IntArray constructor with size and function
-     * 2. Apply function to each index to generate element
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
+     * Special Array Patterns
+     * Common array creation patterns
      */
-    fun createArrayWithFunction(size: Int, function: (Int) -> Int): IntArray {
-        return IntArray(size) { function(it) }
+    fun specialPatterns() {
+        // === RANGE ARRAYS ===
+        val rangeArray = (1..10).toList().toIntArray()     // [1, 2, 3, ..., 10]
+        val stepArray = (0..10 step 2).toList().toIntArray() // [0, 2, 4, 6, 8, 10]
+        val reverseArray = (10 downTo 1).toList().toIntArray() // [10, 9, 8, ..., 1]
+        
+        // === RANDOM ARRAYS ===
+        val randomArray = IntArray(5) { (1..100).random() }
+        val shuffledArray = (1..10).toList().shuffled().toIntArray()
+        
+        // === REPEATED ARRAYS ===
+        val repeatedArray = IntArray(5) { 42 }             // [42, 42, 42, 42, 42]
+        val alternatingArray = IntArray(6) { if (it % 2 == 0) 0 else 1 } // [0, 1, 0, 1, 0, 1]
     }
     
-    /**
-     * Create Array with Range
-     *
-     * Problem: Create an array containing numbers from start to end (inclusive).
-     *
-     * Algorithm:
-     * 1. Create range from start to end
-     * 2. Convert range to list and then to array
-     *
-     * Time Complexity: O(end - start + 1)
-     * Space Complexity: O(end - start + 1)
-     */
-    fun createArrayWithRange(start: Int, end: Int): IntArray {
-        return (start..end).toList().toIntArray()
-    }
-    
-    /**
-     * Create Array with Step
-     *
-     * Problem: Create an array with numbers from start to end with specified step.
-     *
-     * Algorithm:
-     * 1. Create range with step from start to end
-     * 2. Convert range to list and then to array
-     *
-     * Time Complexity: O((end - start) / step)
-     * Space Complexity: O((end - start) / step)
-     */
-    fun createArrayWithStep(start: Int, end: Int, step: Int): IntArray {
-        return (start..end step step).toList().toIntArray()
-    }
-    
-    /**
-     * Create Array with Random Values
-     *
-     * Problem: Create an array with random integer values.
-     *
-     * Algorithm:
-     * 1. Use IntArray constructor with size
-     * 2. Generate random value for each element
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun createArrayWithRandomValues(size: Int, min: Int, max: Int): IntArray {
-        return IntArray(size) { (min..max).random() }
-    }
-    
-    /**
-     * Create Array with Pattern
-     *
-     * Problem: Create an array following a specific pattern.
-     *
-     * Algorithm:
-     * 1. Use IntArray constructor with size
-     * 2. Apply pattern function to each index
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun createArrayWithPattern(size: Int, pattern: (Int) -> Int): IntArray {
-        return IntArray(size) { pattern(it) }
-    }
-    
-    /**
-     * Create 2D Array
-     *
-     * Problem: Create a 2D array (matrix) with specified dimensions.
-     *
-     * Algorithm:
-     * 1. Use Array constructor with rows
-     * 2. Each row is an IntArray with cols elements
-     *
-     * Time Complexity: O(rows * cols)
-     * Space Complexity: O(rows * cols)
-     */
-    fun create2DArray(rows: Int, cols: Int): Array<IntArray> {
-        return Array(rows) { IntArray(cols) }
-    }
-    
-    /**
-     * Create 2D Array with Default Value
-     *
-     * Problem: Create a 2D array with a custom default value.
-     *
-     * Algorithm:
-     * 1. Use Array constructor with rows
-     * 2. Each row is initialized with default value
-     *
-     * Time Complexity: O(rows * cols)
-     * Space Complexity: O(rows * cols)
-     */
-    fun create2DArrayWithDefault(rows: Int, cols: Int, defaultValue: Int): Array<IntArray> {
-        return Array(rows) { IntArray(cols) { defaultValue } }
-    }
-    
-    /**
-     * Create 2D Array with Values
-     *
-     * Problem: Create a 2D array from provided row arrays.
-     *
-     * Algorithm:
-     * 1. Use Array constructor with rows
-     * 2. Copy each provided row array
-     *
-     * Time Complexity: O(total elements)
-     * Space Complexity: O(total elements)
-     */
-    fun create2DArrayWithValues(vararg rows: IntArray): Array<IntArray> {
-        return Array(rows.size) { rows[it] }
-    }
-    
-    /**
-     * Create Identity Matrix
-     *
-     * Problem: Create an identity matrix (diagonal matrix with 1s on diagonal).
-     *
-     * Algorithm:
-     * 1. Create 2D array of size x size
-     * 2. Set element to 1 if row == col, 0 otherwise
-     *
-     * Time Complexity: O(size²)
-     * Space Complexity: O(size²)
-     */
-    fun createIdentityMatrix(size: Int): Array<IntArray> {
-        return Array(size) { row ->
-            IntArray(size) { col ->
-                if (row == col) 1 else 0
-            }
-        }
-    }
-    
-    /**
-     * Create Spiral Matrix
-     *
-     * Problem: Create a matrix filled with numbers in spiral order.
-     *
-     * Algorithm:
-     * 1. Initialize matrix with zeros
-     * 2. Use four pointers (top, bottom, left, right)
-     * 3. Fill matrix in spiral order: top row, right column, bottom row, left column
-     * 4. Update pointers after each direction
-     *
-     * Time Complexity: O(rows * cols)
-     * Space Complexity: O(rows * cols)
-     */
-    fun createSpiralMatrix(rows: Int, cols: Int): Array<IntArray> {
+    // Helper function for spiral matrix
+    private fun createSpiralMatrix(rows: Int, cols: Int): Array<IntArray> {
         val matrix = Array(rows) { IntArray(cols) }
         var value = 1
-        var top = 0
-        var bottom = rows - 1
-        var left = 0
-        var right = cols - 1
+        var top = 0; var bottom = rows - 1; var left = 0; var right = cols - 1
         
         while (top <= bottom && left <= right) {
-            // Fill top row
-            for (i in left..right) {
-                matrix[top][i] = value++
-            }
+            for (i in left..right) matrix[top][i] = value++
             top++
-            
-            // Fill right column
-            for (i in top..bottom) {
-                matrix[i][right] = value++
-            }
+            for (i in top..bottom) matrix[i][right] = value++
             right--
-            
-            // Fill bottom row
             if (top <= bottom) {
-                for (i in right downTo left) {
-                    matrix[bottom][i] = value++
-                }
+                for (i in right downTo left) matrix[bottom][i] = value++
                 bottom--
             }
-            
-            // Fill left column
             if (left <= right) {
-                for (i in bottom downTo top) {
-                    matrix[i][left] = value++
-                }
+                for (i in bottom downTo top) matrix[i][left] = value++
                 left++
             }
         }
-        
         return matrix
-    }
-    
-    /**
-     * Create Diagonal Matrix
-     *
-     * Problem: Create a matrix with values on the main diagonal.
-     *
-     * Algorithm:
-     * 1. Create 2D array of size x size
-     * 2. Set element to value if row == col, 0 otherwise
-     *
-     * Time Complexity: O(size²)
-     * Space Complexity: O(size²)
-     */
-    fun createDiagonalMatrix(size: Int, value: Int): Array<IntArray> {
-        return Array(size) { row ->
-            IntArray(size) { col ->
-                if (row == col) value else 0
-            }
-        }
-    }
-    
-    /**
-     * Create Toeplitz Matrix
-     *
-     * Problem: Create a Toeplitz matrix where each diagonal has constant values.
-     *
-     * Algorithm:
-     * 1. Create 2D array
-     * 2. Set element based on diagonal: matrix[i][j] = diagonal[i-j]
-     *
-     * Time Complexity: O(rows * cols)
-     * Space Complexity: O(rows * cols)
-     */
-    fun createToeplitzMatrix(rows: Int, cols: Int, diagonal: IntArray): Array<IntArray> {
-        val matrix = Array(rows) { IntArray(cols) }
-        
-        for (i in 0 until rows) {
-            for (j in 0 until cols) {
-                val diagonalIndex = i - j
-                if (diagonalIndex < diagonal.size && diagonalIndex >= 0) {
-                    matrix[i][j] = diagonal[diagonalIndex]
-                }
-            }
-        }
-        
-        return matrix
-    }
-    
-    /**
-     * Create Pascal's Triangle
-     *
-     * Problem: Create Pascal's triangle as a 2D array.
-     *
-     * Algorithm:
-     * 1. Create 2D array with increasing row sizes
-     * 2. Set first and last elements of each row to 1
-     * 3. Calculate middle elements as sum of two elements above
-     *
-     * Time Complexity: O(n²)
-     * Space Complexity: O(n²)
-     */
-    fun createPascalsTriangle(n: Int): Array<IntArray> {
-        val triangle = Array(n) { row -> IntArray(row + 1) }
-        
-        for (i in 0 until n) {
-            triangle[i][0] = 1  // First element
-            triangle[i][i] = 1  // Last element
-            
-            for (j in 1 until i) {
-                triangle[i][j] = triangle[i-1][j-1] + triangle[i-1][j]
-            }
-        }
-        
-        return triangle
     }
 } 
