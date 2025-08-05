@@ -1,351 +1,173 @@
 package data_structure.arrays
 
 /**
- * ARRAY UTILITIES ALGORITHMS
- *
- * Problem: Provide utility functions for common array operations like insertion, removal, and replacement.
- *
- * Different utility operations:
- * 1. Remove elements by value or index
- * 2. Insert elements at specific positions
- * 3. Replace elements with new values
- * 4. Handle edge cases and validation
- *
- * Example:
- * Array: [1, 2, 3, 4, 5]
- * Remove element 3: [1, 2, 4, 5]
- * Remove element at index 2: [1, 2, 4, 5]
- * Insert 10 at index 2: [1, 2, 10, 3, 4, 5]
- * Replace 3 with 30: [1, 2, 30, 4, 5]
- *
- * Intuition:
- * - Always validate indices before operations
- * - Create new arrays for immutable operations
- * - Handle edge cases (empty array, invalid indices)
- * - Consider efficiency for large arrays
+ * ARRAY UTILITIES - Quick Reference
+ * All Kotlin array utility methods in one place
  */
 
 object ArrayUtilities {
     
     /**
-     * Remove Element by Value
-     *
-     * Problem: Remove all occurrences of a specific value from an array.
-     *
-     * Algorithm:
-     * 1. Filter array to exclude the specified value
-     * 2. Return new array without the value
-     *
-     * Time Complexity: O(n) - We check each element once
-     * Space Complexity: O(n) - New array for result
+     * Array Insertion
+     * Insert elements at different positions
      */
-    fun removeElement(arr: IntArray, value: Int): IntArray {
-        return arr.filter { it != value }.toIntArray()
-    }
-    
-    /**
-     * Remove Element at Index
-     *
-     * Problem: Remove element at a specific index from an array.
-     *
-     * Algorithm:
-     * 1. Validate index bounds
-     * 2. Create new array excluding the element at index
-     * 3. Return new array
-     *
-     * Time Complexity: O(n) - We copy elements
-     * Space Complexity: O(n) - New array for result
-     */
-    fun removeElementAt(arr: IntArray, index: Int): IntArray {
-        return if (index in arr.indices) {
-            arr.take(index).plus(arr.drop(index + 1)).toIntArray()
-        } else {
-            arr.copyOf()
-        }
-    }
-    
-    /**
-     * Remove Elements in Range
-     *
-     * Problem: Remove elements within a specific range from an array.
-     *
-     * Algorithm:
-     * 1. Validate and adjust start and end indices
-     * 2. Create new array excluding the range
-     * 3. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun removeElementsInRange(arr: IntArray, start: Int, end: Int): IntArray {
-        val startIndex = maxOf(0, start)
-        val endIndex = minOf(arr.size, end + 1)
+    fun arrayInsertion() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
         
-        return if (startIndex < endIndex) {
-            arr.take(startIndex).plus(arr.drop(endIndex)).toIntArray()
-        } else {
-            arr.copyOf()
-        }
-    }
-    
-    /**
-     * Remove Elements by Condition
-     *
-     * Problem: Remove all elements that satisfy a given condition.
-     *
-     * Algorithm:
-     * 1. Filter array to keep elements that don't satisfy condition
-     * 2. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(k) - k elements don't satisfy condition
-     */
-    fun removeElementsByCondition(arr: IntArray, condition: (Int) -> Boolean): IntArray {
-        return arr.filter { !condition(it) }.toIntArray()
-    }
-    
-    /**
-     * Remove Duplicates
-     *
-     * Problem: Remove duplicate elements from an array while preserving order.
-     *
-     * Algorithm:
-     * 1. Use set to track seen elements
-     * 2. Keep only first occurrence of each element
-     * 3. Return new array without duplicates
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n) - Set to track seen elements
-     */
-    fun removeDuplicates(arr: IntArray): IntArray {
-        val seen = mutableSetOf<Int>()
-        val result = mutableListOf<Int>()
+        // === INSERT AT BEGINNING ===
+        val withFirst = intArrayOf(0) + arr                  // [0, 1, 2, 3, 4, 5]
+        val withFirstList = listOf(0) + arr.toList()         // List<Int>
         
-        for (element in arr) {
-            if (seen.add(element)) {
-                result.add(element)
-            }
-        }
+        // === INSERT AT END ===
+        val withLast = arr + 6                               // [1, 2, 3, 4, 5, 6]
+        val withLastList = arr.toList() + 6                  // List<Int>
         
-        return result.toIntArray()
-    }
-    
-    /**
-     * Insert Element at Index
-     *
-     * Problem: Insert an element at a specific index in an array.
-     *
-     * Algorithm:
-     * 1. Validate index (0 to size)
-     * 2. Create new array with element inserted at index
-     * 3. Return new array
-     *
-     * Time Complexity: O(n) - We copy elements
-     * Space Complexity: O(n) - New array for result
-     */
-    fun insertElement(arr: IntArray, index: Int, value: Int): IntArray {
-        return if (index in 0..arr.size) {
-            arr.take(index).plus(value).plus(arr.drop(index)).toIntArray()
-        } else {
-            arr.copyOf()
-        }
-    }
-    
-    /**
-     * Insert Multiple Elements
-     *
-     * Problem: Insert multiple elements at a specific index in an array.
-     *
-     * Algorithm:
-     * 1. Validate index
-     * 2. Create new array with elements inserted at index
-     * 3. Return new array
-     *
-     * Time Complexity: O(n + elements.size)
-     * Space Complexity: O(n + elements.size)
-     */
-    fun insertElements(arr: IntArray, index: Int, elements: IntArray): IntArray {
-        return if (index in 0..arr.size) {
-            arr.take(index).plus(elements.toList()).plus(arr.drop(index)).toIntArray()
-        } else {
-            arr.copyOf()
-        }
-    }
-    
-    /**
-     * Insert Element at Beginning
-     *
-     * Problem: Insert an element at the beginning of an array.
-     *
-     * Algorithm:
-     * 1. Create new array with element at index 0
-     * 2. Copy original array elements after the new element
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun insertAtBeginning(arr: IntArray, value: Int): IntArray {
-        return intArrayOf(value).plus(arr.toList()).toIntArray()
-    }
-    
-    /**
-     * Insert Element at End
-     *
-     * Problem: Insert an element at the end of an array.
-     *
-     * Algorithm:
-     * 1. Create new array with original elements plus new element
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun insertAtEnd(arr: IntArray, value: Int): IntArray {
-        return arr.plus(value).toIntArray()
-    }
-    
-    /**
-     * Replace Element by Value
-     *
-     * Problem: Replace all occurrences of a value with a new value.
-     *
-     * Algorithm:
-     * 1. Map each element, replacing old value with new value
-     * 2. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun replaceElement(arr: IntArray, oldValue: Int, newValue: Int): IntArray {
-        return arr.map { if (it == oldValue) newValue else it }.toIntArray()
-    }
-    
-    /**
-     * Replace Element at Index
-     *
-     * Problem: Replace element at a specific index with a new value.
-     *
-     * Algorithm:
-     * 1. Validate index
-     * 2. Create new array with element replaced at index
-     * 3. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun replaceElementAt(arr: IntArray, index: Int, newValue: Int): IntArray {
-        return if (index in arr.indices) {
-            arr.copyOf().apply { this[index] = newValue }
-        } else {
-            arr.copyOf()
-        }
-    }
-    
-    /**
-     * Replace Elements by Condition
-     *
-     * Problem: Replace elements that satisfy a condition with a new value.
-     *
-     * Algorithm:
-     * 1. Map each element, replacing those that satisfy condition
-     * 2. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun replaceElementsByCondition(arr: IntArray, condition: (Int) -> Boolean, newValue: Int): IntArray {
-        return arr.map { if (condition(it)) newValue else it }.toIntArray()
-    }
-    
-    /**
-     * Replace Elements in Range
-     *
-     * Problem: Replace elements within a specific range with a new value.
-     *
-     * Algorithm:
-     * 1. Validate and adjust start and end indices
-     * 2. Create new array with elements replaced in range
-     * 3. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun replaceElementsInRange(arr: IntArray, start: Int, end: Int, newValue: Int): IntArray {
-        val startIndex = maxOf(0, start)
-        val endIndex = minOf(arr.size, end + 1)
+        // === INSERT AT INDEX ===
+        val index = 2; val value = 10
+        val withInsert = arr.take(index) + value + arr.drop(index) // [1, 2, 10, 3, 4, 5]
         
-        return arr.mapIndexed { index, value ->
-            if (index in startIndex until endIndex) newValue else value
-        }.toIntArray()
+        // === INSERT MULTIPLE ===
+        val multiple = arr.take(2) + intArrayOf(10, 20) + arr.drop(2) // [1, 2, 10, 20, 3, 4, 5]
     }
     
     /**
-     * Clear Array
-     *
-     * Problem: Remove all elements from an array.
-     *
-     * Algorithm:
-     * 1. Return empty array
-     *
-     * Time Complexity: O(1)
-     * Space Complexity: O(1)
+     * Array Removal
+     * Remove elements by different criteria
      */
-    fun clearArray(arr: IntArray): IntArray {
-        return intArrayOf()
+    fun arrayRemoval() {
+        val arr = intArrayOf(1, 2, 3, 4, 5, 3, 6, 3, 7)
+        
+        // === REMOVE BY VALUE ===
+        val without3 = arr.filter { it != 3 }                // [1, 2, 4, 5, 6, 7]
+        val withoutFirst3 = arr.takeWhile { it != 3 } + arr.dropWhile { it != 3 }.drop(1) // [1, 2, 4, 5, 3, 6, 3, 7]
+        
+        // === REMOVE AT INDEX ===
+        val index = 2
+        val withoutIndex = arr.take(index) + arr.drop(index + 1) // [1, 2, 4, 5, 3, 6, 3, 7]
+        
+        // === REMOVE RANGE ===
+        val start = 1; val end = 3
+        val withoutRange = arr.take(start) + arr.drop(end + 1) // [1, 5, 3, 6, 3, 7]
+        
+        // === REMOVE DUPLICATES ===
+        val unique = arr.distinct()                          // [1, 2, 3, 4, 5, 6, 7]
+        val uniquePreserveOrder = arr.toSet().toList()       // Preserve order if needed
     }
     
     /**
-     * Resize Array
-     *
-     * Problem: Change the size of an array, either expanding or shrinking.
-     *
-     * Algorithm:
-     * 1. Create new array of specified size
-     * 2. Copy elements up to minimum of old and new size
-     * 3. Fill remaining positions with default value if expanding
-     *
-     * Time Complexity: O(min(oldSize, newSize))
-     * Space Complexity: O(newSize)
+     * Array Replacement
+     * Replace elements in different ways
      */
-    fun resizeArray(arr: IntArray, newSize: Int, defaultValue: Int = 0): IntArray {
-        val result = IntArray(newSize) { defaultValue }
-        val copySize = minOf(arr.size, newSize)
-        arr.copyInto(result, 0, 0, copySize)
-        return result
+    fun arrayReplacement() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
+        
+        // === REPLACE BY VALUE ===
+        val replace3with10 = arr.map { if (it == 3) 10 else it } // [1, 2, 10, 4, 5]
+        
+        // === REPLACE AT INDEX ===
+        val index = 2; val newValue = 10
+        val replacedAtIndex = arr.mapIndexed { i, value -> if (i == index) newValue else value } // [1, 2, 10, 4, 5]
+        
+        // === REPLACE BY CONDITION ===
+        val replaceEvenWith0 = arr.map { if (it % 2 == 0) 0 else it } // [1, 0, 3, 0, 5]
+        val replaceGreaterThan3 = arr.map { if (it > 3) 99 else it } // [1, 2, 3, 99, 99]
+        
+        // === REPLACE RANGE ===
+        val start = 1; val end = 3; val replacement = 99
+        val replacedRange = arr.mapIndexed { i, value -> if (i in start..end) replacement else value } // [1, 99, 99, 99, 5]
     }
     
     /**
-     * Clone Array
-     *
-     * Problem: Create a deep copy of an array.
-     *
-     * Algorithm:
-     * 1. Create new array of same size
-     * 2. Copy all elements to new array
-     * 3. Return new array
-     *
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
+     * Array Resizing
+     * Change array size
      */
-    fun cloneArray(arr: IntArray): IntArray {
-        return arr.copyOf()
+    fun arrayResizing() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
+        
+        // === EXPAND ARRAY ===
+        val expanded = arr.copyOf(10)                        // [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
+        val expandedWithDefault = IntArray(10) { if (it < arr.size) arr[it] else -1 } // [1, 2, 3, 4, 5, -1, -1, -1, -1, -1]
+        
+        // === SHRINK ARRAY ===
+        val shrunk = arr.copyOf(3)                           // [1, 2, 3]
+        
+        // === RESIZE WITH PADDING ===
+        val padded = arr + IntArray(3) { 0 }                 // [1, 2, 3, 4, 5, 0, 0, 0]
+        val paddedFront = IntArray(3) { 0 } + arr            // [0, 0, 0, 1, 2, 3, 4, 5]
     }
     
     /**
-     * Clone Array Range
-     *
-     * Problem: Create a copy of a specific range of an array.
-     *
-     * Algorithm:
-     * 1. Validate and adjust start and end indices
-     * 2. Create new array for the range
-     * 3. Copy elements from start to end
-     *
-     * Time Complexity: O(end - start)
-     * Space Complexity: O(end - start)
+     * Array Comparison
+     * Compare arrays in different ways
      */
-    fun cloneArrayRange(arr: IntArray, start: Int, end: Int): IntArray {
-        val startIndex = maxOf(0, start)
-        val endIndex = minOf(arr.size, end + 1)
-        return if (startIndex < endIndex) arr.slice(startIndex until endIndex).toIntArray() else intArrayOf()
+    fun arrayComparison() {
+        val arr1 = intArrayOf(1, 2, 3, 4, 5)
+        val arr2 = intArrayOf(1, 2, 3, 4, 5)
+        val arr3 = intArrayOf(5, 4, 3, 2, 1)
+        
+        // === EQUALITY CHECK ===
+        val areEqual = arr1.contentEquals(arr2)              // true
+        val areNotEqual = arr1.contentEquals(arr3)           // false
+        
+        // === ELEMENT-WISE COMPARISON ===
+        val elementWise = arr1.zip(arr2).map { (a, b) -> a == b } // [true, true, true, true, true]
+        
+        // === COMPARE SIZES ===
+        val sameSize = arr1.size == arr2.size                // true
+        val differentSize = arr1.size != arr3.size           // false
+        
+        // === COMPARE CONTENTS ===
+        val sameContents = arr1.toSet() == arr2.toSet()      // true (ignores order)
+        val differentContents = arr1.toSet() != arr3.toSet() // false
+    }
+    
+    /**
+     * Array Statistics
+     * Basic statistical operations
+     */
+    fun arrayStatistics() {
+        val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+        
+        // === BASIC STATS ===
+        val sum = arr.sum()                                  // 55
+        val average = arr.average()                          // 5.5
+        val min = arr.minOrNull()                            // 1
+        val max = arr.maxOrNull()                            // 10
+        val count = arr.count()                              // 10
+        
+        // === CONDITIONAL STATS ===
+        val evenCount = arr.count { it % 2 == 0 }           // 5
+        val oddSum = arr.filter { it % 2 == 1 }.sum()       // 25
+        val greaterThan5Count = arr.count { it > 5 }        // 5
+        
+        // === FREQUENCY ===
+        val frequency = arr.groupBy { it }.mapValues { it.value.size } // {1=1, 2=1, 3=1, 4=1, 5=1, 6=1, 7=1, 8=1, 9=1, 10=1}
+        val mostFrequent = frequency.maxByOrNull { it.value }?.key // Any element (all have frequency 1)
+    }
+    
+    /**
+     * Array Validation
+     * Validate array properties
+     */
+    fun arrayValidation() {
+        val arr = intArrayOf(1, 2, 3, 4, 5)
+        val emptyArr = intArrayOf()
+        val duplicateArr = intArrayOf(1, 2, 2, 3, 4)
+        
+        // === BASIC VALIDATION ===
+        val isEmpty = arr.isEmpty()                          // false
+        val isNotEmpty = arr.isNotEmpty()                    // true
+        val hasSize = arr.size == 5                          // true
+        
+        // === CONTENT VALIDATION ===
+        val hasDuplicates = arr.size != arr.distinct().size  // false
+        val isSorted = arr.zipWithNext().all { (a, b) -> a <= b } // true
+        val allPositive = arr.all { it > 0 }                // true
+        val anyNegative = arr.any { it < 0 }                // false
+        
+        // === RANGE VALIDATION ===
+        val allInRange = arr.all { it in 1..10 }            // true
+        val hasEven = arr.any { it % 2 == 0 }               // true
+        val allEven = arr.all { it % 2 == 0 }               // false
     }
 } 
