@@ -93,8 +93,10 @@ object MapTransformation {
         val map1 = mapOf("A" to 1, "B" to 2)
         val map2 = mapOf("B" to 20, "C" to 3)
         val mergedMap = map1 + map2                              // {A=1, B=20, C=3} (map2 values override)
-        val mergedWithFunction = map1.merge(map2) { oldValue, newValue -> 
-            oldValue + newValue 
+        val mergedWithFunction = (map1.toMutableMap()).apply {
+            map2.forEach { (key, value) ->
+                put(key, get(key)?.plus(value) ?: value)
+            }
         }                                                        // {A=1, B=22, C=3}
         
         // === SORTING TRANSFORMATIONS ===
@@ -105,7 +107,7 @@ object MapTransformation {
         
         // === CONVERSION TRANSFORMATIONS ===
         val toList = map.toList()                                // [(A,1), (B,2), (C,3), (D,4), (E,5)]
-        val toSet = map.toSet()                                  // {(A,1), (B,2), (C,3), (D,4), (E,5)}
+        val toSet = map.entries.toSet()                          // {(A=1), (B=2), (C=3), (D=4), (E=5)}
         val keysList = map.keys.toList()                         // [A, B, C, D, E]
         val valuesList = map.values.toList()                     // [1, 2, 3, 4, 5]
         val entriesList = map.entries.toList()                   // [A=1, B=2, C=3, D=4, E=5]

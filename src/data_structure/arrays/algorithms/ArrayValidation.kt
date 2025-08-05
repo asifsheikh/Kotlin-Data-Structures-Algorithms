@@ -1,5 +1,7 @@
 package data_structure.arrays
 
+import kotlin.math.abs
+
 /**
  * ARRAY VALIDATION ALGORITHMS
  * 

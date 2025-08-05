@@ -100,7 +100,7 @@ object TrieCreation {
     /**
      * Creates a basic trie from a list of words
      */
-    private fun createBasicTrie(words: List<String>): TrieNode {
+    fun createBasicTrie(words: List<String>): TrieNode {
         val root = TrieNode()
         
         for (word in words) {
@@ -125,7 +125,7 @@ object TrieCreation {
     /**
      * Creates an enhanced trie with map-based children
      */
-    private fun createEnhancedTrie(words: List<String>): EnhancedTrieNode {
+    fun createEnhancedTrie(words: List<String>): EnhancedTrieNode {
         val root = EnhancedTrieNode()
         
         for (word in words) {
@@ -147,7 +147,7 @@ object TrieCreation {
     /**
      * Creates a weighted trie with frequencies
      */
-    private fun createWeightedTrie(words: List<Pair<String, Int>>): EnhancedTrieNode {
+    fun createWeightedTrie(words: List<Pair<String, Int>>): EnhancedTrieNode {
         val root = EnhancedTrieNode()
         
         for ((word, frequency) in words) {
@@ -170,7 +170,7 @@ object TrieCreation {
     /**
      * Creates a case-sensitive trie
      */
-    private fun createCaseSensitiveTrie(words: List<String>): EnhancedTrieNode {
+    fun createCaseSensitiveTrie(words: List<String>): EnhancedTrieNode {
         val root = EnhancedTrieNode()
         
         for (word in words) {
@@ -192,7 +192,7 @@ object TrieCreation {
     /**
      * Creates a trie with custom data
      */
-    private fun createCustomDataTrie(words: List<Pair<String, Any>>): EnhancedTrieNode {
+    fun createCustomDataTrie(words: List<Pair<String, Any>>): EnhancedTrieNode {
         val root = EnhancedTrieNode()
         
         for ((word, data) in words) {

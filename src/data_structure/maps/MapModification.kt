@@ -49,7 +49,7 @@ object MapModification {
         newMap.putAll(mapOf("W" to 400, "V" to 500))            // Add multiple entries
         newMap += mapOf("U" to 600, "T" to 700)                 // Add multiple entries
         newMap -= listOf("X", "Y")                              // Remove multiple keys
-        newMap.retainAll { (key, value) -> value > 200 }        // Keep only entries with value > 200
+        newMap.entries.removeAll { it.value <= 200 }            // Keep only entries with value > 200
         
         // === TRANSFORMATION OPERATIONS ===
         val transformMap = mutableMapOf("A" to 1, "B" to 2, "C" to 3)
@@ -78,14 +78,14 @@ object MapModification {
         // === BATCH OPERATIONS ===
         val batchMap = mutableMapOf<String, Int>()
         batchMap.putAll((1..5).associate { "key$it" to it })     // Add multiple entries
-        batchMap.removeAll { (key, value) -> value % 2 == 0 }    // Remove even values
-        batchMap.retainAll { (key, value) -> value > 2 }         // Keep values > 2
+        batchMap.entries.removeAll { it.value % 2 == 0 }         // Remove even values
+        batchMap.entries.removeAll { it.value <= 2 }             // Keep values > 2
         
         // === SWAP OPERATIONS ===
         val swapMap = mutableMapOf("A" to 1, "B" to 2)
         val temp = swapMap["A"]
-        swapMap["A"] = swapMap["B"]
-        swapMap["B"] = temp                                       // Swap values
+        swapMap["A"] = swapMap["B"] ?: 0
+        swapMap["B"] = temp ?: 0                                 // Swap values
         
         // === INCREMENT/DECREMENT OPERATIONS ===
         val counterMap = mutableMapOf("A" to 0, "B" to 0, "C" to 0)

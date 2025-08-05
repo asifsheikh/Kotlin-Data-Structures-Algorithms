@@ -31,7 +31,7 @@ object ListModification {
         
         // === REVERSE OPERATIONS ===
         list.reverse()                                         // Reverse entire list
-        list.reverse(1, 4)                                     // Reverse range [1, 4)
+        list.subList(1, 4).reverse()                           // Reverse range [1, 4)
         
         // === MANUAL REVERSE ===
         var left = 0; var right = list.size - 1

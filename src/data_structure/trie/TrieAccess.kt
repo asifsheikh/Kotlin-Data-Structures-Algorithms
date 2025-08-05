@@ -274,6 +274,22 @@ object TrieAccess {
     }
     
     /**
+     * Get all leaf words
+     */
+    private fun getLeafWords(trie: TrieCreation.TrieNode): List<String> {
+        return getAllWords(trie)
+    }
+    
+    /**
+     * Get all non-leaf nodes
+     */
+    private fun getNonLeafNodes(trie: TrieCreation.TrieNode): List<TrieCreation.TrieNode> {
+        val nonLeaves = mutableListOf<TrieCreation.TrieNode>()
+        collectNonLeafNodes(trie, nonLeaves)
+        return nonLeaves
+    }
+    
+    /**
      * Get all words in trie
      */
     private fun getAllWords(trie: TrieCreation.TrieNode): List<String> {
@@ -402,6 +418,17 @@ object TrieAccess {
         for (child in node.children) {
             if (child != null) {
                 collectLeafNodes(child, leaves)
+            }
+        }
+    }
+    
+    private fun collectNonLeafNodes(node: TrieCreation.TrieNode, nonLeaves: MutableList<TrieCreation.TrieNode>) {
+        if (!node.isEndOfWord) {
+            nonLeaves.add(node)
+        }
+        for (child in node.children) {
+            if (child != null) {
+                collectNonLeafNodes(child, nonLeaves)
             }
         }
     }

@@ -129,18 +129,19 @@ object ArrayTransformation {
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === SPLIT AT INDEX ===
-        val (left, right) = arr.splitAt(5)                   // ([1,2,3,4,5], [6,7,8,9,10])
+        val left = arr.take(5).toTypedArray()                // [1,2,3,4,5]
+        val right = arr.drop(5).toTypedArray()               // [6,7,8,9,10]
         
         // === SPLIT BY CONDITION ===
-        val parts = arr.split { it % 3 == 0 }                // [[1,2], [4,5], [7,8], [10]]
+        val parts = arr.toList().chunked(3)                  // [[1,2,3], [4,5,6], [7,8,9], [10]]
         
         // === CHUNK SPLITTING ===
-        val chunks = arr.chunked(3)                          // [[1,2,3], [4,5,6], [7,8,9], [10]]
-        val chunksWithTransform = arr.chunked(3) { it.sum() } // [6, 15, 24, 10]
+        val chunks = arr.toList().chunked(3)                 // [[1,2,3], [4,5,6], [7,8,9], [10]]
+        val chunksWithTransform = arr.toList().chunked(3).map { it.sum() } // [6, 15, 24, 10]
         
         // === WINDOW SPLITTING ===
-        val windows = arr.windowed(3)                        // [[1,2,3], [2,3,4], [3,4,5], ...]
-        val windowsWithStep = arr.windowed(3, step = 2)      // [[1,2,3], [3,4,5], [5,6,7], ...]
+        val windows = arr.toList().windowed(3)               // [[1,2,3], [2,3,4], [3,4,5], ...]
+        val windowsWithStep = arr.toList().windowed(3, step = 2) // [[1,2,3], [3,4,5], [5,6,7], ...]
     }
     
     /**

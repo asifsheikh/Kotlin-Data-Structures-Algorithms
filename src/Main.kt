@@ -20,11 +20,21 @@ fun main() {
     
     // ===== DATA STRUCTURES =====
     println("1. ARRAYS")
-    ArrayAlgorithms.demonstrateArrayAlgorithms()
+    println("   - ArrayCreation.allArrayCreationMethods()")
+    println("   - ArrayAccess.allArrayAccessMethods()")
+    println("   - ArrayModification.allArrayModificationMethods()")
+    println("   - ArrayTransformation.allArrayTransformationMethods()")
+    println("   - ArrayUtilities.allArrayUtilityMethods()")
+    println("   - See algorithms/ package for specific algorithms")
     println()
     
     println("2. LISTS")
-    ListAlgorithms.demonstrateListAlgorithms()
+    println("   - ListCreation.allListCreationMethods()")
+    println("   - ListAccess.allListAccessMethods()")
+    println("   - ListModification.allListModificationMethods()")
+    println("   - ListTransformation.allListTransformationMethods()")
+    println("   - ListUtilities.allListUtilityMethods()")
+    println("   - See algorithms/ package for specific algorithms")
     println()
     
     println("3. STACKS")
@@ -44,7 +54,12 @@ fun main() {
     println()
     
     println("7. MAPS")
-    MapAlgorithms.demonstrateMapAlgorithms()
+    println("   - MapCreation.allMapCreationMethods()")
+    println("   - MapAccess.allMapAccessMethods()")
+    println("   - MapModification.allMapModificationMethods()")
+    println("   - MapTransformation.allMapTransformationMethods()")
+    println("   - MapUtilities.allMapUtilityMethods()")
+    println("   - See algorithms/ package for specific algorithms")
     println()
     
     println("8. STRINGS")
@@ -52,7 +67,9 @@ fun main() {
     println()
     
     println("9. TRIE")
-    TrieAlgorithms.demonstrateTrieAlgorithms()
+    println("   - TrieCreation.allTrieCreationMethods()")
+    println("   - TrieAccess.allTrieAccessMethods()")
+    println("   - See algorithms/ package for specific algorithms")
     println()
     
     println("10. LINKED LISTS")
@@ -64,11 +81,11 @@ fun main() {
     println()
     
     println("12. TREES")
-    TreeProperties.demonstrateTreeProperties()
+    println("   - TreeProperties.demonstrateTreeProperties()")
     println()
     
     println("13. GRAPHS")
-    BFS.demonstrateBFS()
+    println("   - BFS.demonstrateBFS()")
     println()
     
     // ===== ALGORITHMS =====
@@ -92,15 +109,10 @@ fun main() {
     searchingAlgorithms()
     println()
     
-    println("15. SORTING ALGORITHMS")
-    sortingAlgorithms()
-    println()
-    
-    println("16. SEARCHING ALGORITHMS")
-    searchingAlgorithms()
-    println()
-    
-    println("=== DEMONSTRATION COMPLETE ===")
+    println("=== REFERENCE COMPLETE ===")
+    println("This repository contains comprehensive Kotlin implementations of")
+    println("data structures and algorithms for interview preparation.")
+    println("Each data structure has quick-reference files and dedicated algorithm packages.")
 }
 
 

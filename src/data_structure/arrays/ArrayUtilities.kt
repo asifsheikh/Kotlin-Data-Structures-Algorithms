@@ -168,7 +168,7 @@ object ArrayUtilities {
         
         // === CONTENT VALIDATION ===
         val hasDuplicates = arr.size != arr.distinct().size  // false
-        val isSorted = arr.zipWithNext().all { (a, b) -> a <= b } // true
+        val isSorted = arr.toList().zipWithNext().all { (a, b) -> a <= b } // true
         val allPositive = arr.all { it > 0 }                // true
         val anyNegative = arr.any { it < 0 }                // false
         

@@ -70,7 +70,7 @@ object MapUtilities {
         
         // === CONVERSION OPERATIONS ===
         val toList = map.toList()                                // [(A,1), (B,2), (C,3), (D,4), (E,5)]
-        val toSet = map.toSet()                                  // {(A,1), (B,2), (C,3), (D,4), (E,5)}
+        val toSet = map.entries.toSet()                          // {(A=1), (B=2), (C=3), (D=4), (E=5)}
         val toMutableMap = map.toMutableMap()                    // MutableMap
         val toHashMap = HashMap(map)                             // HashMap
         val toLinkedHashMap = LinkedHashMap(map)                 // LinkedHashMap
@@ -139,20 +139,20 @@ object MapUtilities {
         }
         
         // === GROUPING OPERATIONS ===
-        val groupedByValueEvenOdd = map.groupBy { (_, value) -> value % 2 == 0 } // {false=[A=1, C=3, E=5], true=[B=2, D=4]}
-        val groupedByKeyVowel = map.groupBy { (key, _) -> key in "AEIOU" } // {true=[A=1, E=5], false=[B=2, C=3, D=4]}
-        val groupedByValueRange = map.groupBy { (_, value) -> 
+        val groupedByValueEvenOdd = map.entries.groupBy { it.value % 2 == 0 } // {false=[A=1, C=3, E=5], true=[B=2, D=4]}
+        val groupedByKeyVowel = map.entries.groupBy { it.key in "AEIOU" } // {true=[A=1, E=5], false=[B=2, C=3, D=4]}
+        val groupedByValueRange = map.entries.groupBy { 
             when {
-                value <= 2 -> "small"
-                value <= 4 -> "medium"
+                it.value <= 2 -> "small"
+                it.value <= 4 -> "medium"
                 else -> "large"
             }
         }                                                        // {small=[A=1, B=2], medium=[C=3, D=4], large=[E=5]}
         
-        val groupedByKeyLength = map.groupBy { (key, _) -> key.length } // {1=[A=1, B=2, C=3, D=4, E=5]}
-        val groupedByValueType = map.groupBy { (_, value) -> 
+        val groupedByKeyLength = map.entries.groupBy { it.key.length } // {1=[A=1, B=2, C=3, D=4, E=5]}
+        val groupedByValueType = map.entries.groupBy { 
             when {
-                value % 2 == 0 -> "even"
+                it.value % 2 == 0 -> "even"
                 else -> "odd"
             }
         }                                                        // {odd=[A=1, C=3, E=5], even=[B=2, D=4]}

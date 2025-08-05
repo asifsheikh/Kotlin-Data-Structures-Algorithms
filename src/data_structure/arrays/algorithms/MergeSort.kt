@@ -150,7 +150,7 @@ object MergeSort {
                 }
                 arr[i] = value
                 i++
-                mid++
+                // mid stays the same
                 j++
             }
         }

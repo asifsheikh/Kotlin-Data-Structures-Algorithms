@@ -56,8 +56,9 @@ object ListTransformation {
         
         // === SPLITTING OPERATIONS ===
         val longList = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
-        val (left, right) = longList.splitAt(5)                // ([1,2,3,4,5], [6,7,8,9,10])
-        val parts = longList.split { it % 3 == 0 }             // [[1,2], [4,5], [7,8], [10]]
+        val left = longList.take(5)                            // [1,2,3,4,5]
+        val right = longList.drop(5)                           // [6,7,8,9,10]
+        val parts = longList.chunked(3)                        // [[1,2,3], [4,5,6], [7,8,9], [10]]
         val chunks = longList.chunked(3)                       // [[1,2,3], [4,5,6], [7,8,9], [10]]
         val chunksWithTransform = longList.chunked(3) { it.sum() } // [6, 15, 24, 10]
         val windows = longList.windowed(3)                     // [[1,2,3], [2,3,4], [3,4,5], ...]

@@ -120,7 +120,7 @@ object MapAccess {
             "group2" to mapOf("C" to 3, "D" to 4)
         )
         val group1 = nestedMap["group1"]                         // {A=1, B=2}
-        val valueAInGroup1 = nestedMap["group1"]?["A"]           // 1
+        val valueAInGroup1 = nestedMap["group1"]?.get("A")       // 1
         val valueXInGroup1 = nestedMap["group1"]?.get("X")       // null
         val safeNestedAccess = nestedMap["group1"]?.get("X") ?: -1 // -1
         
