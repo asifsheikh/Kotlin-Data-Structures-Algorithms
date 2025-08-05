@@ -1,4 +1,4 @@
-package data_structure.arrays.algorithms.utilities
+package data_structure.arrays.utilities
 
 /**
  * ARRAY UTILITIES ALGORITHMS

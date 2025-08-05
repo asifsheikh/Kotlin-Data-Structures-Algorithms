@@ -1,4 +1,4 @@
-package data_structure.arrays.algorithms.transformation
+package data_structure.arrays.transformation
 
 /**
  * ARRAY TRANSFORMATION ALGORITHMS
