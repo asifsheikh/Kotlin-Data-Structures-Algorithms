@@ -1,4 +1,4 @@
-package data_structure.arrays.algorithms.problems
+package data_structure.arrays.algorithms
 
 /**
  * MAXIMUM SUBARRAY SUM (KADANE'S ALGORITHM)

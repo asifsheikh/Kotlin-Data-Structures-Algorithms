@@ -1,4 +1,4 @@
-package data_structure.arrays.algorithms.searching
+package data_structure.arrays.algorithms
 
 /**
  * BINARY SEARCH ALGORITHM

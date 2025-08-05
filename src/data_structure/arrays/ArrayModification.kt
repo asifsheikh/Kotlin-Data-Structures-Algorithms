@@ -1,4 +1,4 @@
-package data_structure.arrays.modification
+package data_structure.arrays
 
 /**
  * ARRAY MODIFICATION ALGORITHMS

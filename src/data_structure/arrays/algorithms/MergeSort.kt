@@ -1,4 +1,4 @@
-package data_structure.arrays.algorithms.sorting
+package data_structure.arrays.algorithms
 
 /**
  * MERGESORT ALGORITHM

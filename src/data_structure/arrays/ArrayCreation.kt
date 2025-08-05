@@ -1,4 +1,4 @@
-package data_structure.arrays.creation
+package data_structure.arrays
 
 /**
  * ARRAY CREATION ALGORITHMS

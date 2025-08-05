@@ -1,4 +1,4 @@
-package data_structure.arrays.access
+package data_structure.arrays
 
 /**
  * ARRAY ACCESS ALGORITHMS
