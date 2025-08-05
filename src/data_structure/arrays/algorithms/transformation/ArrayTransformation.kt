@@ -1,122 +1,186 @@
-package data_structure.arrays
+package data_structure.arrays.algorithms.transformation
 
 /**
  * ARRAY TRANSFORMATION ALGORITHMS
- * 
- * Problem: Transform arrays in various ways like mapping, filtering, reshaping, etc.
- * 
+ *
+ * Problem: Transform arrays using various operations like mapping, filtering, reshaping, and flattening.
+ *
  * Different transformations:
- * 1. Map: Apply function to each element
- * 2. Filter: Keep elements that satisfy condition
- * 3. Flatten: Convert 2D array to 1D
- * 4. Reshape: Change dimensions of array
- * 5. Concatenate: Join multiple arrays
- * 6. Split: Divide array into parts
- * 
+ * 1. Map elements using a transformation function
+ * 2. Filter elements based on conditions
+ * 3. Flatten 2D arrays to 1D
+ * 4. Reshape arrays to different dimensions
+ * 5. Concatenate multiple arrays
+ * 6. Split arrays into parts
+ *
  * Example:
  * Array: [1, 2, 3, 4, 5]
- * Map (square): [1, 4, 9, 16, 25]
- * Filter (even): [2, 4]
- * 
+ * Map (x * 2): [2, 4, 6, 8, 10]
+ * Filter (x > 3): [4, 5]
  * 2D Array: [[1, 2], [3, 4], [5, 6]]
  * Flatten: [1, 2, 3, 4, 5, 6]
- * Reshape (2x3): [[1, 2, 3], [4, 5, 6]]
- * 
+ *
  * Intuition:
- * - Map: Create new array with transformed values
- * - Filter: Create new array with selected values
- * - Flatten: Concatenate all sub-arrays
- * - Reshape: Reorganize elements in new dimensions
- * - Use mathematical formulas for index mapping
+ * - Use functional programming concepts
+ * - Handle edge cases (empty arrays, invalid dimensions)
+ * - Optimize for space and time complexity
+ * - Consider in-place vs new array creation
  */
 
 object ArrayTransformation {
     
     /**
-     * Map Array
-     * 
-     * Problem: Apply a transformation function to each element of array
-     * 
+     * Map Array Elements
+     *
+     * Problem: Apply a transformation function to each element of an array.
+     *
      * Algorithm:
      * 1. Create new array of same size
      * 2. Apply transform function to each element
      * 3. Store result in new array
-     * 
+     *
      * Time Complexity: O(n) - We process each element once
-     * Space Complexity: O(n) - We create new array
+     * Space Complexity: O(n) - New array for result
      */
     fun mapArray(arr: IntArray, transform: (Int) -> Int): IntArray {
         return IntArray(arr.size) { transform(arr[it]) }
     }
     
     /**
-     * Filter Array
-     * 
-     * Problem: Keep only elements that satisfy given condition
-     * 
+     * Map Array with Index
+     *
+     * Problem: Apply transformation function that has access to element index.
+     *
      * Algorithm:
-     * 1. Create list to store filtered elements
-     * 2. Check each element with predicate
-     * 3. Add element if condition is true
-     * 4. Convert list to array
-     * 
+     * 1. Create new array of same size
+     * 2. Apply transform function with element and index
+     * 3. Store result in new array
+     *
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
+     */
+    fun mapArrayWithIndex(arr: IntArray, transform: (Int, Int) -> Int): IntArray {
+        return IntArray(arr.size) { transform(arr[it], it) }
+    }
+    
+    /**
+     * Filter Array Elements
+     *
+     * Problem: Create new array containing only elements that satisfy a condition.
+     *
+     * Algorithm:
+     * 1. Traverse array and check each element
+     * 2. Collect elements that satisfy predicate
+     * 3. Return filtered array
+     *
      * Time Complexity: O(n) - We check each element once
-     * Space Complexity: O(n) - Worst case, all elements pass filter
+     * Space Complexity: O(k) - k elements satisfy condition
      */
     fun filterArray(arr: IntArray, predicate: (Int) -> Boolean): IntArray {
         return arr.filter(predicate).toIntArray()
     }
     
     /**
-     * Flatten 2D Array
-     * 
-     * Problem: Convert 2D array (matrix) to 1D array
-     * 
+     * Filter Array with Index
+     *
+     * Problem: Filter elements based on condition that has access to index.
+     *
      * Algorithm:
-     * 1. Calculate total size from all sub-arrays
-     * 2. Create 1D array of that size
-     * 3. Copy elements from each sub-array sequentially
-     * 
-     * Time Complexity: O(n*m) - n rows, m columns
-     * Space Complexity: O(n*m) - New flattened array
+     * 1. Traverse array with index
+     * 2. Check predicate with element and index
+     * 3. Collect matching elements
+     *
+     * Time Complexity: O(n)
+     * Space Complexity: O(k)
+     */
+    fun filterArrayWithIndex(arr: IntArray, predicate: (Int, Int) -> Boolean): IntArray {
+        return arr.filterIndexed(predicate).toIntArray()
+    }
+    
+    /**
+     * Flatten 2D Array
+     *
+     * Problem: Convert 2D array (matrix) to 1D array.
+     *
+     * Algorithm:
+     * 1. Calculate total size from all rows
+     * 2. Traverse each row and copy elements
+     * 3. Return flattened array
+     *
+     * Time Complexity: O(rows * cols) - We process each element once
+     * Space Complexity: O(rows * cols) - New array for result
      */
     fun flatten2DArray(matrix: Array<IntArray>): IntArray {
         return matrix.flatMap { it.toList() }.toIntArray()
     }
     
     /**
-     * Flatten 2D Array (Manual)
-     * 
-     * Time Complexity: O(n*m)
-     * Space Complexity: O(n*m)
+     * Flatten 2D Array (Row-wise)
+     *
+     * Problem: Flatten 2D array by concatenating rows.
+     *
+     * Algorithm:
+     * 1. Calculate total size
+     * 2. Copy elements row by row
+     * 3. Handle rows of different lengths
+     *
+     * Time Complexity: O(rows * cols)
+     * Space Complexity: O(rows * cols)
      */
-    fun flatten2DArrayManual(matrix: Array<IntArray>): IntArray {
+    fun flatten2DArrayRowWise(matrix: Array<IntArray>): IntArray {
         val totalSize = matrix.sumOf { it.size }
         val result = IntArray(totalSize)
         var index = 0
         
         for (row in matrix) {
-            for (element in row) {
-                result[index++] = element
-            }
+            row.copyInto(result, index)
+            index += row.size
         }
         
         return result
     }
     
     /**
-     * Reshape Array
-     * 
-     * Problem: Change dimensions of array from 1D to 2D
-     * 
+     * Flatten 2D Array (Column-wise)
+     *
+     * Problem: Flatten 2D array by concatenating columns.
+     *
      * Algorithm:
-     * 1. Check if reshape is possible (size must match)
-     * 2. Create 2D array with new dimensions
-     * 3. Map 1D indices to 2D indices using formulas:
-     *    - row = index / cols
-     *    - col = index % cols
-     * 
-     * Time Complexity: O(n) - We process each element once
+     * 1. Find maximum column length
+     * 2. Copy elements column by column
+     * 3. Handle rows of different lengths
+     *
+     * Time Complexity: O(rows * cols)
+     * Space Complexity: O(rows * cols)
+     */
+    fun flatten2DArrayColumnWise(matrix: Array<IntArray>): IntArray {
+        if (matrix.isEmpty()) return intArrayOf()
+        
+        val maxCols = matrix.maxOfOrNull { it.size } ?: 0
+        val result = mutableListOf<Int>()
+        
+        for (col in 0 until maxCols) {
+            for (row in matrix) {
+                if (col < row.size) {
+                    result.add(row[col])
+                }
+            }
+        }
+        
+        return result.toIntArray()
+    }
+    
+    /**
+     * Reshape Array
+     *
+     * Problem: Reshape 1D array to 2D array with specified dimensions.
+     *
+     * Algorithm:
+     * 1. Check if total elements match (rows * cols)
+     * 2. Create 2D array with specified dimensions
+     * 3. Copy elements row by row
+     *
+     * Time Complexity: O(n) - We copy each element once
      * Space Complexity: O(n) - New 2D array
      */
     fun reshapeArray(arr: IntArray, rows: Int, cols: Int): Array<IntArray>? {
@@ -132,17 +196,42 @@ object ArrayTransformation {
     }
     
     /**
-     * Concatenate Arrays
-     * 
-     * Problem: Join multiple arrays into single array
-     * 
+     * Reshape Array (Column-wise)
+     *
+     * Problem: Reshape array by filling columns first.
+     *
      * Algorithm:
-     * 1. Calculate total size of all arrays
-     * 2. Create result array of that size
+     * 1. Check if dimensions are valid
+     * 2. Fill matrix column by column
+     * 3. Handle remaining elements
+     *
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
+     */
+    fun reshapeArrayColumnWise(arr: IntArray, rows: Int, cols: Int): Array<IntArray>? {
+        if (arr.size != rows * cols) return null
+        
+        val matrix = Array(rows) { IntArray(cols) }
+        for (i in arr.indices) {
+            val row = i % rows
+            val col = i / rows
+            matrix[row][col] = arr[i]
+        }
+        return matrix
+    }
+    
+    /**
+     * Concatenate Arrays
+     *
+     * Problem: Combine multiple arrays into a single array.
+     *
+     * Algorithm:
+     * 1. Calculate total size from all arrays
+     * 2. Create result array of total size
      * 3. Copy elements from each array sequentially
-     * 
-     * Time Complexity: O(total size of all arrays)
-     * Space Complexity: O(total size of all arrays)
+     *
+     * Time Complexity: O(total size) - We copy each element once
+     * Space Complexity: O(total size) - New array for result
      */
     fun concatenateArrays(vararg arrays: IntArray): IntArray {
         val totalSize = arrays.sumOf { it.size }
@@ -159,16 +248,16 @@ object ArrayTransformation {
     
     /**
      * Concatenate 2D Arrays
-     * 
-     * Problem: Join multiple 2D arrays vertically
-     * 
+     *
+     * Problem: Combine multiple 2D arrays into a single 2D array.
+     *
      * Algorithm:
-     * 1. Calculate total rows and max columns
-     * 2. Create result matrix with new dimensions
-     * 3. Copy each row from input matrices
-     * 
-     * Time Complexity: O(total elements in all matrices)
-     * Space Complexity: O(total elements in result matrix)
+     * 1. Calculate total rows and maximum columns
+     * 2. Create result matrix
+     * 3. Copy rows from each matrix
+     *
+     * Time Complexity: O(total rows * max cols)
+     * Space Complexity: O(total rows * max cols)
      */
     fun concatenate2DArrays(vararg matrices: Array<IntArray>): Array<IntArray> {
         val totalRows = matrices.sumOf { it.size }
@@ -189,14 +278,15 @@ object ArrayTransformation {
     
     /**
      * Split Array
-     * 
-     * Problem: Divide array into two parts at given index
-     * 
+     *
+     * Problem: Split array into two parts at a specific index.
+     *
      * Algorithm:
-     * 1. Create two arrays: left (0 to index-1) and right (index to end)
-     * 2. Copy elements to respective arrays
-     * 
-     * Time Complexity: O(n) - We copy all elements
+     * 1. Validate split index
+     * 2. Create two arrays: left and right
+     * 3. Copy elements to respective arrays
+     *
+     * Time Complexity: O(n) - We copy each element once
      * Space Complexity: O(n) - Two new arrays
      */
     fun splitArray(arr: IntArray, index: Int): Pair<IntArray, IntArray> {
@@ -207,16 +297,16 @@ object ArrayTransformation {
     
     /**
      * Split Array by Value
-     * 
-     * Problem: Split array into multiple parts at occurrences of given value
-     * 
+     *
+     * Problem: Split array into multiple parts using a delimiter value.
+     *
      * Algorithm:
      * 1. Traverse array and collect elements
-     * 2. When delimiter is found, create new sub-array
-     * 3. Continue until end of array
-     * 
-     * Time Complexity: O(n) - We process each element once
-     * Space Complexity: O(n) - List of sub-arrays
+     * 2. When delimiter is found, create new part
+     * 3. Handle consecutive delimiters
+     *
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
      */
     fun splitArrayByValue(arr: IntArray, value: Int): List<IntArray> {
         val result = mutableListOf<IntArray>()
@@ -241,110 +331,64 @@ object ArrayTransformation {
     }
     
     /**
-     * Transpose Matrix
-     * 
-     * Problem: Convert rows to columns and columns to rows
-     * 
+     * Split Array into Chunks
+     *
+     * Problem: Split array into chunks of specified size.
+     *
      * Algorithm:
-     * 1. Create new matrix with swapped dimensions
-     * 2. Copy elements with swapped indices: result[i][j] = matrix[j][i]
-     * 
-     * Time Complexity: O(n*m) - n rows, m columns
-     * Space Complexity: O(n*m) - New transposed matrix
+     * 1. Process array in chunks of chunk size
+     * 2. Create subarray for each chunk
+     * 3. Handle last chunk if smaller than chunk size
+     *
+     * Time Complexity: O(n)
+     * Space Complexity: O(n)
      */
-    fun transposeMatrix(matrix: Array<IntArray>): Array<IntArray> {
-        val rows = matrix.size
-        val cols = matrix[0].size
+    fun splitArrayIntoChunks(arr: IntArray, chunkSize: Int): List<IntArray> {
+        val result = mutableListOf<IntArray>()
         
-        val result = Array(cols) { IntArray(rows) }
-        
-        for (i in 0 until rows) {
-            for (j in 0 until cols) {
-                result[j][i] = matrix[i][j]
-            }
+        for (i in 0 until arr.size step chunkSize) {
+            val end = minOf(i + chunkSize, arr.size)
+            result.add(arr.slice(i until end).toIntArray())
         }
         
         return result
     }
     
     /**
-     * Rotate Matrix 90 Degrees Clockwise
-     * 
-     * Problem: Rotate matrix by 90 degrees clockwise
-     * 
+     * Copy Array Range
+     *
+     * Problem: Create a copy of array elements within a specific range.
+     *
      * Algorithm:
-     * 1. Transpose the matrix
-     * 2. Reverse each row
-     * 
-     * Time Complexity: O(n²) - n x n matrix
-     * Space Complexity: O(n²) - New rotated matrix
+     * 1. Validate and adjust start and end indices
+     * 2. Create new array for the range
+     * 3. Copy elements from start to end
+     *
+     * Time Complexity: O(end - start)
+     * Space Complexity: O(end - start)
      */
-    fun rotateMatrix90Clockwise(matrix: Array<IntArray>): Array<IntArray> {
-        val transposed = transposeMatrix(matrix)
-        
-        // Reverse each row
-        for (row in transposed) {
-            var left = 0
-            var right = row.size - 1
-            while (left < right) {
-                row[left] = row[right].also { row[right] = row[left] }
-                left++
-                right--
-            }
-        }
-        
-        return transposed
+    fun copyArrayRange(arr: IntArray, start: Int, end: Int): IntArray {
+        val startIndex = maxOf(0, start)
+        val endIndex = minOf(arr.size, end + 1)
+        return if (startIndex < endIndex) arr.slice(startIndex until endIndex).toIntArray() else intArrayOf()
     }
     
     /**
-     * Rotate Matrix 90 Degrees Counter-clockwise
-     * 
+     * Copy Array with Padding
+     *
+     * Problem: Create a copy of array with padding to reach specified size.
+     *
      * Algorithm:
-     * 1. Transpose the matrix
-     * 2. Reverse each column (or reverse the entire matrix)
-     * 
-     * Time Complexity: O(n²)
-     * Space Complexity: O(n²)
+     * 1. Create new array of specified size
+     * 2. Fill with padding value
+     * 3. Copy original array elements
+     *
+     * Time Complexity: O(newSize)
+     * Space Complexity: O(newSize)
      */
-    fun rotateMatrix90CounterClockwise(matrix: Array<IntArray>): Array<IntArray> {
-        val transposed = transposeMatrix(matrix)
-        
-        // Reverse the entire matrix (equivalent to reversing each column)
-        val rows = transposed.size
-        val cols = transposed[0].size
-        
-        for (i in 0 until rows / 2) {
-            for (j in 0 until cols) {
-                transposed[i][j] = transposed[rows - 1 - i][j].also { 
-                    transposed[rows - 1 - i][j] = transposed[i][j] 
-                }
-            }
-        }
-        
-        return transposed
-    }
-    
-    /**
-     * Convert 1D Array to 2D Array (Column-wise)
-     * 
-     * Problem: Convert 1D array to 2D array filling column by column
-     * 
-     * Algorithm:
-     * 1. Create 2D array with given dimensions
-     * 2. Map 1D index to 2D indices: row = index % rows, col = index / rows
-     * 
-     * Time Complexity: O(n)
-     * Space Complexity: O(n)
-     */
-    fun reshapeArrayColumnWise(arr: IntArray, rows: Int, cols: Int): Array<IntArray>? {
-        if (arr.size != rows * cols) return null
-        
-        val matrix = Array(rows) { IntArray(cols) }
-        for (i in arr.indices) {
-            val row = i % rows
-            val col = i / rows
-            matrix[row][col] = arr[i]
-        }
-        return matrix
+    fun copyArrayWithPadding(arr: IntArray, newSize: Int, paddingValue: Int = 0): IntArray {
+        val result = IntArray(newSize) { paddingValue }
+        arr.copyInto(result, 0, 0, minOf(arr.size, newSize))
+        return result
     }
 } 
