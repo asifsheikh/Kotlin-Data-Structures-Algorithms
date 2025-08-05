@@ -12,6 +12,7 @@ object ArrayAccess {
      * Standard array access operations
      */
     fun basicAccess() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === DIRECT ACCESS ===
@@ -35,6 +36,7 @@ object ArrayAccess {
      * Accessing array elements in ranges
      */
     fun rangeAccess() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === SLICE OPERATIONS ===
@@ -59,6 +61,7 @@ object ArrayAccess {
      * Accessing elements based on conditions
      */
     fun conditionalAccess() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === FILTER OPERATIONS ===
@@ -80,6 +83,7 @@ object ArrayAccess {
      * Accessing multiple elements at once
      */
     fun multipleElementAccess() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === MULTIPLE INDICES ===
@@ -106,6 +110,7 @@ object ArrayAccess {
      * Accessing elements in 2D arrays
      */
     fun twoDimensionalAccess() {
+        // Create matrix within function - standalone
         val matrix = arrayOf(
             intArrayOf(1, 2, 3),
             intArrayOf(4, 5, 6),

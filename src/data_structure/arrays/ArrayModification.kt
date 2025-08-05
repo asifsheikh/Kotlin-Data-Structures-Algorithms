@@ -12,6 +12,7 @@ object ArrayModification {
      * Standard array modification operations
      */
     fun basicModification() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === SET ELEMENTS ===
@@ -31,6 +32,7 @@ object ArrayModification {
      * Different ways to reverse arrays
      */
     fun arrayReversal() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === FULL REVERSE ===
@@ -59,6 +61,7 @@ object ArrayModification {
      * Rotating array elements
      */
     fun arrayRotation() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === LEFT ROTATION ===
@@ -82,6 +85,7 @@ object ArrayModification {
      * Different ways to fill arrays
      */
     fun arrayFilling() {
+        // Create array within function - standalone
         val arr = IntArray(5)
         
         // === BASIC FILL ===
@@ -104,6 +108,7 @@ object ArrayModification {
      * Different ways to copy arrays
      */
     fun arrayCopying() {
+        // Create array within function - standalone
         val original = intArrayOf(1, 2, 3, 4, 5)
         
         // === BASIC COPY ===
@@ -128,6 +133,7 @@ object ArrayModification {
      * Modifying 2D arrays
      */
     fun twoDimensionalModification() {
+        // Create matrix within function - standalone
         val matrix = Array(3) { IntArray(3) { 0 } }
         
         // === SET ELEMENTS ===

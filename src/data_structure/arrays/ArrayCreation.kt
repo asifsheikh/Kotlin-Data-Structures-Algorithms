@@ -84,7 +84,7 @@ object ArrayCreation {
         val alternatingArray = IntArray(6) { if (it % 2 == 0) 0 else 1 } // [0, 1, 0, 1, 0, 1]
     }
     
-    // Helper function for spiral matrix
+    // Helper function for spiral matrix - standalone within this file
     private fun createSpiralMatrix(rows: Int, cols: Int): Array<IntArray> {
         val matrix = Array(rows) { IntArray(cols) }
         var value = 1

@@ -12,6 +12,7 @@ object ArrayTransformation {
      * Transform each element using functions
      */
     fun arrayMapping() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === BASIC MAP ===
@@ -33,6 +34,7 @@ object ArrayTransformation {
      * Select elements based on conditions
      */
     fun arrayFiltering() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === BASIC FILTER ===
@@ -55,6 +57,7 @@ object ArrayTransformation {
      * Convert nested arrays to flat arrays
      */
     fun arrayFlattening() {
+        // Create matrix within function - standalone
         val matrix = arrayOf(
             intArrayOf(1, 2, 3),
             intArrayOf(4, 5, 6),
@@ -78,6 +81,7 @@ object ArrayTransformation {
      * Change array dimensions
      */
     fun arrayReshaping() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6)
         
         // === 1D TO 2D (ROW-WISE) ===
@@ -98,6 +102,7 @@ object ArrayTransformation {
      * Combine multiple arrays
      */
     fun arrayConcatenation() {
+        // Create arrays within function - standalone
         val arr1 = intArrayOf(1, 2, 3)
         val arr2 = intArrayOf(4, 5, 6)
         val arr3 = intArrayOf(7, 8, 9)
@@ -120,6 +125,7 @@ object ArrayTransformation {
      * Divide arrays into parts
      */
     fun arraySplitting() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === SPLIT AT INDEX ===
@@ -142,6 +148,7 @@ object ArrayTransformation {
      * Create copies with modifications
      */
     fun arrayCopying() {
+        // Create array within function - standalone
         val original = intArrayOf(1, 2, 3, 4, 5)
         
         // === BASIC COPY ===

@@ -12,6 +12,7 @@ object ArrayUtilities {
      * Insert elements at different positions
      */
     fun arrayInsertion() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === INSERT AT BEGINNING ===
@@ -35,6 +36,7 @@ object ArrayUtilities {
      * Remove elements by different criteria
      */
     fun arrayRemoval() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 3, 6, 3, 7)
         
         // === REMOVE BY VALUE ===
@@ -59,6 +61,7 @@ object ArrayUtilities {
      * Replace elements in different ways
      */
     fun arrayReplacement() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === REPLACE BY VALUE ===
@@ -82,6 +85,7 @@ object ArrayUtilities {
      * Change array size
      */
     fun arrayResizing() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         
         // === EXPAND ARRAY ===
@@ -101,6 +105,7 @@ object ArrayUtilities {
      * Compare arrays in different ways
      */
     fun arrayComparison() {
+        // Create arrays within function - standalone
         val arr1 = intArrayOf(1, 2, 3, 4, 5)
         val arr2 = intArrayOf(1, 2, 3, 4, 5)
         val arr3 = intArrayOf(5, 4, 3, 2, 1)
@@ -126,6 +131,7 @@ object ArrayUtilities {
      * Basic statistical operations
      */
     fun arrayStatistics() {
+        // Create array within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
         
         // === BASIC STATS ===
@@ -150,6 +156,7 @@ object ArrayUtilities {
      * Validate array properties
      */
     fun arrayValidation() {
+        // Create arrays within function - standalone
         val arr = intArrayOf(1, 2, 3, 4, 5)
         val emptyArr = intArrayOf()
         val duplicateArr = intArrayOf(1, 2, 2, 3, 4)
