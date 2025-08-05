@@ -8,10 +8,10 @@ package data_structure.lists
 object ListModification {
     
     /**
-     * Basic List Modification
-     * Standard list modification operations (mutable lists only)
+     * All List Modification Methods
+     * Complete reference for modifying lists in Kotlin
      */
-    fun basicModification() {
+    fun allListModificationMethods() {
         // Create mutable list within function - standalone
         val list = mutableListOf(1, 2, 3, 4, 5)
         
@@ -28,21 +28,10 @@ object ListModification {
         list.remove(3)                                         // Remove first occurrence of 3
         list.removeAt(2)                                       // Remove element at index 2
         list.removeAll(listOf(2, 4, 6))                       // Remove all occurrences
-    }
-    
-    /**
-     * List Reversal
-     * Different ways to reverse lists
-     */
-    fun listReversal() {
-        // Create list within function - standalone
-        val list = mutableListOf(1, 2, 3, 4, 5)
         
-        // === REVERSE IN-PLACE ===
-        list.reverse()                                         // [5, 4, 3, 2, 1]
-        
-        // === REVERSE RANGE ===
-        list.reverse(1, 4)                                     // [5, 2, 3, 4, 1]
+        // === REVERSE OPERATIONS ===
+        list.reverse()                                         // Reverse entire list
+        list.reverse(1, 4)                                     // Reverse range [1, 4)
         
         // === MANUAL REVERSE ===
         var left = 0; var right = list.size - 1
@@ -50,35 +39,16 @@ object ListModification {
             list[left] = list[right].also { list[right] = list[left] }
             left++; right--
         }
-    }
-    
-    /**
-     * List Sorting
-     * Different ways to sort lists
-     */
-    fun listSorting() {
-        // Create list within function - standalone
-        val list = mutableListOf(5, 2, 8, 1, 9, 3, 7, 4, 6)
         
-        // === BASIC SORTING ===
-        list.sort()                                            // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        list.sortDescending()                                  // [9, 8, 7, 6, 5, 4, 3, 2, 1]
-        
-        // === CUSTOM SORTING ===
+        // === SORTING OPERATIONS ===
+        list.sort()                                            // Sort in ascending order
+        list.sortDescending()                                  // Sort in descending order
         list.sortBy { it % 3 }                                 // Sort by remainder when divided by 3
         list.sortWith(compareBy<Int> { it % 2 }.thenBy { it }) // Sort by even/odd, then by value
-    }
-    
-    /**
-     * List Shuffling
-     * Different ways to shuffle lists
-     */
-    fun listShuffling() {
-        // Create list within function - standalone
-        val list = mutableListOf(1, 2, 3, 4, 5)
         
-        // === SHUFFLE IN-PLACE ===
-        list.shuffle()                                         // Random permutation in-place
+        // === SHUFFLING OPERATIONS ===
+        list.shuffle()                                         // Shuffle in-place
+        val shuffledList = list.shuffled()                     // New shuffled list
         
         // === FISHER-YATES SHUFFLE ===
         for (i in list.size - 1 downTo 1) {
@@ -86,23 +56,20 @@ object ListModification {
             list[i] = list[j].also { list[j] = list[i] }
         }
         
-        // === SHUFFLED (RETURNS NEW LIST) ===
-        val shuffledList = list.shuffled()                     // New shuffled list
-    }
-    
-    /**
-     * List Deduplication
-     * Removing duplicates from lists
-     */
-    fun listDeduplication() {
-        // Create list within function - standalone
-        val list = mutableListOf(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)
-        
-        // === REMOVE DUPLICATES ===
-        val unique = list.distinct()                           // [1, 2, 3, 4]
-        
-        // === REMOVE DUPLICATES IN-PLACE ===
+        // === DEDUPLICATION ===
+        val duplicateList = mutableListOf(1, 2, 2, 3, 3, 3, 4, 4, 4, 4)
+        val unique = duplicateList.distinct()                  // [1, 2, 3, 4]
         val seen = mutableSetOf<Int>()
-        list.removeAll { !seen.add(it) }                       // Remove duplicates, keep first occurrence
+        duplicateList.removeAll { !seen.add(it) }              // Remove duplicates in-place
+        
+        // === FILLING OPERATIONS ===
+        val fillList = MutableList(5) { 0 }
+        fillList.fill(42)                                      // [42, 42, 42, 42, 42]
+        for (i in fillList.indices) fillList[i] = i * 2       // [0, 2, 4, 6, 8]
+        
+        // === TRANSFORMATION OPERATIONS ===
+        list.replaceAll { it * 2 }                             // Multiply all elements by 2
+        list.replaceAll { if (it % 2 == 0) it * 10 else it }  // Multiply even elements by 10
+        for (i in list.indices) list[i] = list[i] + i         // Add index to each element
     }
 } 
