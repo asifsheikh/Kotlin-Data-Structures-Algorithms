@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.EnhancedTrieCreation
 
 /**
  * AUTOCOMPLETE WITH CUSTOM RANKING ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithRanking {
      * Autocomplete with custom ranking function
      */
     fun autocompleteWithRanking(
-        root: TrieCreation.EnhancedTrieNode, 
+        root: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         k: Int,
         rankingFunction: (String, Int) -> Int
@@ -47,7 +47,7 @@ object AutocompleteWithRanking {
     
     // Helper method
     private fun collectWordsWithCustomRanking(
-        node: TrieCreation.EnhancedTrieNode, 
+        node: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         result: MutableList<Triple<String, Int, Int>>,
         rankingFunction: (String, Int) -> Int

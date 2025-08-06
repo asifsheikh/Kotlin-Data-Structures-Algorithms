@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.EnhancedTrieCreation
 
 /**
  * AUTOCOMPLETE WITH CONTEXT ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithContext {
      * Autocomplete with context awareness
      */
     fun autocompleteWithContext(
-        root: TrieCreation.EnhancedTrieNode, 
+        root: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         context: String,
         k: Int = 5
@@ -47,7 +47,7 @@ object AutocompleteWithContext {
     
     // Helper methods
     private fun collectWordsWithContext(
-        node: TrieCreation.EnhancedTrieNode, 
+        node: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         result: MutableList<Pair<String, Double>>,
         context: String

@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.BasicTrieCreation
 
 /**
  * AUTOCOMPLETE WITH LENGTH FILTER ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithLengthFilter {
      * Autocomplete with length-based filtering
      */
     fun autocompleteWithLengthFilter(
-        root: TrieCreation.TrieNode, 
+        root: BasicTrieCreation.TrieNode, 
         prefix: String, 
         minLength: Int = 0,
         maxLength: Int = Int.MAX_VALUE
@@ -49,7 +49,7 @@ object AutocompleteWithLengthFilter {
     
     // Helper method
     private fun collectWordsWithLengthFilter(
-        node: TrieCreation.TrieNode, 
+        node: BasicTrieCreation.TrieNode, 
         prefix: String, 
         result: MutableList<String>,
         minLength: Int,

@@ -23,7 +23,7 @@ object AutocompleteBasic {
     /**
      * Basic autocomplete with alphabetical sorting
      */
-    fun autocompleteBasic(root: TrieCreation.TrieNode, prefix: String): List<String> {
+    fun autocompleteBasic(root: BasicTrieCreation.TrieNode, prefix: String): List<String> {
         val result = mutableListOf<String>()
         var node = root
         
@@ -44,7 +44,7 @@ object AutocompleteBasic {
     }
     
     // Helper method
-    private fun collectWords(node: TrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWords(node: BasicTrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }

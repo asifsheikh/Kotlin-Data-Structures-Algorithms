@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.BasicTrieCreation
 
 /**
  * AUTOCOMPLETE WITH PATTERN ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithPattern {
      * Autocomplete with pattern matching
      */
     fun autocompleteWithPattern(
-        root: TrieCreation.TrieNode, 
+        root: BasicTrieCreation.TrieNode, 
         prefix: String, 
         pattern: String
     ): List<String> {
@@ -48,7 +48,7 @@ object AutocompleteWithPattern {
     
     // Helper method
     private fun collectWordsWithPattern(
-        node: TrieCreation.TrieNode, 
+        node: BasicTrieCreation.TrieNode, 
         prefix: String, 
         result: MutableList<String>,
         pattern: String

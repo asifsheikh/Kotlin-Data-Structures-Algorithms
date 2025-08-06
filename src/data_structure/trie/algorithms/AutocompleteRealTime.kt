@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.BasicTrieCreation
 
 /**
  * AUTOCOMPLETE REAL-TIME ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteRealTime {
      * Autocomplete with real-time suggestions
      */
     fun autocompleteRealTime(
-        root: TrieCreation.TrieNode, 
+        root: BasicTrieCreation.TrieNode, 
         partialInput: String,
         maxSuggestions: Int = 10
     ): List<String> {
@@ -47,7 +47,7 @@ object AutocompleteRealTime {
     }
     
     // Helper method
-    private fun collectWords(node: TrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWords(node: BasicTrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }

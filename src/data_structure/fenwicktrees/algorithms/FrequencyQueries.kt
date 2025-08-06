@@ -23,7 +23,7 @@ object FrequencyQueries {
     /**
      * Basic frequency query
      */
-    fun frequencyQuery(arr: IntArray, queries: List<Int>): List<Int> {
+    fun frequencyQuery(arr: IntArray, queries: List<Int>): List<Long> {
         val maxElement = arr.maxOrNull() ?: 0
         val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
@@ -95,14 +95,14 @@ object FrequencyQueries {
         
         for ((left, right, target) in queries) {
             // Reset Fenwick tree for each query
-            val tempFenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+            val tempFenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
             
             // Count frequencies in range
             for (i in left..right) {
                 tempFenwick.update(arr[i], 1)
             }
             
-            results.add(tempFenwick.query(target) - tempFenwick.query(target - 1))
+            results.add((tempFenwick.query(target) - tempFenwick.query(target - 1)).toInt())
         }
         
         return results

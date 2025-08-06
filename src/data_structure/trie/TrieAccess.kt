@@ -105,7 +105,7 @@ object TrieAccess {
     /**
      * Search for a word in basic trie
      */
-    private fun searchWord(trie: TrieCreation.TrieNode, word: String): Boolean {
+    private fun searchWord(trie: BasicTrieCreation.TrieNode, word: String): Boolean {
         var node = trie
         for (char in word.lowercase()) {
             if (char.isLetter()) {
@@ -122,7 +122,7 @@ object TrieAccess {
     /**
      * Search for a prefix in basic trie
      */
-    private fun searchPrefix(trie: TrieCreation.TrieNode, prefix: String): Boolean {
+    private fun searchPrefix(trie: BasicTrieCreation.TrieNode, prefix: String): Boolean {
         var node = trie
         for (char in prefix.lowercase()) {
             if (char.isLetter()) {
@@ -139,7 +139,7 @@ object TrieAccess {
     /**
      * Find all words with given prefix
      */
-    private fun findWordsWithPrefix(trie: TrieCreation.TrieNode, prefix: String): List<String> {
+    private fun findWordsWithPrefix(trie: BasicTrieCreation.TrieNode, prefix: String): List<String> {
         val result = mutableListOf<String>()
         var node = trie
         
@@ -162,14 +162,14 @@ object TrieAccess {
     /**
      * Count total words in trie
      */
-    private fun countWords(trie: TrieCreation.TrieNode): Int {
+    private fun countWords(trie: BasicTrieCreation.TrieNode): Int {
         return countWordsRecursive(trie)
     }
     
     /**
      * Count words with given prefix
      */
-    private fun countWordsWithPrefix(trie: TrieCreation.TrieNode, prefix: String): Int {
+    private fun countWordsWithPrefix(trie: BasicTrieCreation.TrieNode, prefix: String): Int {
         var node = trie
         for (char in prefix.lowercase()) {
             if (char.isLetter()) {
@@ -186,7 +186,7 @@ object TrieAccess {
     /**
      * Find node at given path
      */
-    private fun findNode(trie: TrieCreation.TrieNode, path: String): TrieCreation.TrieNode? {
+    private fun findNode(trie: BasicTrieCreation.TrieNode, path: String): BasicTrieCreation.TrieNode? {
         var node = trie
         for (char in path.lowercase()) {
             if (char.isLetter()) {
@@ -301,7 +301,7 @@ object TrieAccess {
     /**
      * Get all prefixes in trie
      */
-    private fun getAllPrefixes(trie: TrieCreation.TrieNode): List<String> {
+    private fun getAllPrefixes(trie: BasicTrieCreation.TrieNode): List<String> {
         val prefixes = mutableListOf<String>()
         collectPrefixes(trie, "", prefixes)
         return prefixes
@@ -310,7 +310,7 @@ object TrieAccess {
     /**
      * Find words with condition
      */
-    private fun findWordsWithCondition(trie: TrieCreation.TrieNode, condition: (String) -> Boolean): List<String> {
+    private fun findWordsWithCondition(trie: BasicTrieCreation.TrieNode, condition: (String) -> Boolean): List<String> {
         val words = getAllWords(trie)
         return words.filter(condition)
     }
@@ -318,7 +318,7 @@ object TrieAccess {
     /**
      * Find words ending with suffix
      */
-    private fun findWordsEndingWith(trie: TrieCreation.TrieNode, suffix: String): List<String> {
+    private fun findWordsEndingWith(trie: BasicTrieCreation.TrieNode, suffix: String): List<String> {
         val words = getAllWords(trie)
         return words.filter { it.endsWith(suffix) }
     }
@@ -326,7 +326,7 @@ object TrieAccess {
     /**
      * Get most frequent prefix
      */
-    private fun getMostFrequentPrefix(trie: TrieCreation.TrieNode): String {
+    private fun getMostFrequentPrefix(trie: BasicTrieCreation.TrieNode): String {
         val prefixes = getAllPrefixes(trie)
         return prefixes.maxByOrNull { countWordsWithPrefix(trie, it) } ?: ""
     }
@@ -334,7 +334,7 @@ object TrieAccess {
     /**
      * Get least frequent prefix
      */
-    private fun getLeastFrequentPrefix(trie: TrieCreation.TrieNode): String {
+    private fun getLeastFrequentPrefix(trie: BasicTrieCreation.TrieNode): String {
         val prefixes = getAllPrefixes(trie)
         return prefixes.minByOrNull { countWordsWithPrefix(trie, it) } ?: ""
     }
@@ -342,7 +342,7 @@ object TrieAccess {
     /**
      * Get prefix frequencies
      */
-    private fun getPrefixFrequencies(trie: TrieCreation.TrieNode): Map<String, Int> {
+    private fun getPrefixFrequencies(trie: BasicTrieCreation.TrieNode): Map<String, Int> {
         val prefixes = getAllPrefixes(trie)
         return prefixes.associateWith { countWordsWithPrefix(trie, it) }
     }
@@ -379,7 +379,7 @@ object TrieAccess {
     }
     
     // Helper methods
-    private fun collectWords(node: TrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWords(node: BasicTrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }
@@ -391,7 +391,7 @@ object TrieAccess {
         }
     }
     
-    private fun countWordsRecursive(node: TrieCreation.TrieNode): Int {
+    private fun countWordsRecursive(node: BasicTrieCreation.TrieNode): Int {
         var count = if (node.isEndOfWord) 1 else 0
         for (child in node.children) {
             if (child != null) {
@@ -401,7 +401,7 @@ object TrieAccess {
         return count
     }
     
-    private fun getMaxDepthRecursive(node: TrieCreation.TrieNode): Int {
+    private fun getMaxDepthRecursive(node: BasicTrieCreation.TrieNode): Int {
         var maxDepth = 0
         for (child in node.children) {
             if (child != null) {
@@ -411,7 +411,7 @@ object TrieAccess {
         return maxDepth + 1
     }
     
-    private fun collectLeafNodes(node: TrieCreation.TrieNode, leaves: MutableList<TrieCreation.TrieNode>) {
+    private fun collectLeafNodes(node: BasicTrieCreation.TrieNode, leaves: MutableList<BasicTrieCreation.TrieNode>) {
         if (node.isEndOfWord) {
             leaves.add(node)
         }
@@ -422,7 +422,7 @@ object TrieAccess {
         }
     }
     
-    private fun collectNonLeafNodes(node: TrieCreation.TrieNode, nonLeaves: MutableList<TrieCreation.TrieNode>) {
+    private fun collectNonLeafNodes(node: BasicTrieCreation.TrieNode, nonLeaves: MutableList<BasicTrieCreation.TrieNode>) {
         if (!node.isEndOfWord) {
             nonLeaves.add(node)
         }
@@ -433,7 +433,7 @@ object TrieAccess {
         }
     }
     
-    private fun collectPrefixes(node: TrieCreation.TrieNode, prefix: String, prefixes: MutableList<String>) {
+    private fun collectPrefixes(node: BasicTrieCreation.TrieNode, prefix: String, prefixes: MutableList<String>) {
         if (prefix.isNotEmpty()) {
             prefixes.add(prefix)
         }

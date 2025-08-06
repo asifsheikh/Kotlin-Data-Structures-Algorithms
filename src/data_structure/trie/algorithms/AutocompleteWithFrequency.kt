@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.EnhancedTrieCreation
 
 /**
  * AUTOCOMPLETE WITH FREQUENCY ALGORITHM
@@ -22,7 +22,7 @@ object AutocompleteWithFrequency {
     /**
      * Autocomplete with frequency-based ranking
      */
-    fun autocompleteWithFrequency(root: TrieCreation.EnhancedTrieNode, prefix: String, k: Int): List<String> {
+    fun autocompleteWithFrequency(root: EnhancedTrieCreation.EnhancedTrieNode, prefix: String, k: Int): List<String> {
         var node = root
         
         // Traverse to the prefix node
@@ -42,7 +42,7 @@ object AutocompleteWithFrequency {
     
     // Helper method
     private fun collectWordsWithFrequency(
-        node: TrieCreation.EnhancedTrieNode, 
+        node: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         result: MutableList<Pair<String, Int>>
     ) {

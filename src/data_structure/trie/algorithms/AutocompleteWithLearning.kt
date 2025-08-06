@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.EnhancedTrieCreation
 
 /**
  * AUTOCOMPLETE WITH LEARNING ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithLearning {
      * Autocomplete with learning (updates frequency based on selection)
      */
     fun autocompleteWithLearning(
-        root: TrieCreation.EnhancedTrieNode, 
+        root: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         selectedWord: String? = null,
         k: Int = 5

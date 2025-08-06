@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.BasicTrieCreation
 
 /**
  * AUTOCOMPLETE MULTIPLE PREFIXES ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteMultiplePrefixes {
      * Autocomplete with multiple prefixes
      */
     fun autocompleteMultiplePrefixes(
-        root: TrieCreation.TrieNode, 
+        root: BasicTrieCreation.TrieNode, 
         prefixes: List<String>
     ): Map<String, List<String>> {
         val result = mutableMapOf<String, List<String>>()
@@ -36,7 +36,7 @@ object AutocompleteMultiplePrefixes {
     }
     
     // Helper method
-    private fun autocompleteBasic(root: TrieCreation.TrieNode, prefix: String): List<String> {
+    private fun autocompleteBasic(root: BasicTrieCreation.TrieNode, prefix: String): List<String> {
         val result = mutableListOf<String>()
         var node = root
         
@@ -56,7 +56,7 @@ object AutocompleteMultiplePrefixes {
         return result.sorted()
     }
     
-    private fun collectWords(node: TrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWords(node: BasicTrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }

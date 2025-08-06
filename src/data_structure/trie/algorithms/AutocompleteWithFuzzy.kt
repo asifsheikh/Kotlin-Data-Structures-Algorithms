@@ -1,6 +1,6 @@
 package data_structure.trie.algorithms
 
-import data_structure.trie.TrieCreation
+import data_structure.trie.BasicTrieCreation
 
 /**
  * AUTOCOMPLETE WITH FUZZY MATCHING ALGORITHM
@@ -23,7 +23,7 @@ object AutocompleteWithFuzzy {
      * Autocomplete with fuzzy matching
      */
     fun autocompleteWithFuzzy(
-        root: TrieCreation.TrieNode, 
+        root: BasicTrieCreation.TrieNode, 
         prefix: String, 
         maxDistance: Int = 1
     ): List<String> {
@@ -40,13 +40,13 @@ object AutocompleteWithFuzzy {
     }
     
     // Helper methods
-    private fun getAllWords(root: TrieCreation.TrieNode): List<String> {
+    private fun getAllWords(root: BasicTrieCreation.TrieNode): List<String> {
         val words = mutableListOf<String>()
         collectWords(root, "", words)
         return words
     }
     
-    private fun collectWords(node: TrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWords(node: BasicTrieCreation.TrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }
