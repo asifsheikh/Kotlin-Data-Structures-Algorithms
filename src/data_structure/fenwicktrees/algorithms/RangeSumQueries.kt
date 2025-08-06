@@ -1,6 +1,6 @@
 package data_structure.fenwicktrees.algorithms
 
-import data_structure.fenwicktrees.FenwickTreeCreation
+import data_structure.fenwicktrees.BasicFenwickTreeCreation
 
 /**
  * RANGE SUM QUERIES ALGORITHM
@@ -23,7 +23,7 @@ object RangeSumQueries {
      * Basic range sum query with point updates
      */
     fun rangeSumQuery(arr: LongArray, queries: List<Pair<String, List<Int>>>): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {
@@ -58,7 +58,7 @@ object RangeSumQueries {
         updates: List<Triple<Int, Int, Long>>, 
         queries: List<Pair<Int, Int>>
     ): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {
@@ -84,7 +84,7 @@ object RangeSumQueries {
         rangeUpdates: List<Triple<Int, Int, Long>>,
         queries: List<Pair<Int, Int>>
     ): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize with difference array
         fenwick.update(0, arr[0])
@@ -113,7 +113,7 @@ object RangeSumQueries {
         arr: LongArray,
         queries: List<Triple<String, Int, Int>>
     ): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {
@@ -147,7 +147,7 @@ object RangeSumQueries {
         arr: LongArray,
         queries: List<Triple<String, Int, Int>>
     ): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {
@@ -192,7 +192,7 @@ object RangeSumQueries {
      * Range sum with sliding window
      */
     fun rangeSumSlidingWindow(arr: LongArray, windowSize: Int): List<Long> {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {
@@ -212,7 +212,7 @@ object RangeSumQueries {
      * Range sum with binary search
      */
     fun rangeSumWithBinarySearch(arr: LongArray, targetSum: Long): Int {
-        val fenwick = FenwickTreeCreation.FenwickTree(arr.size)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(arr.size)
         
         // Initialize Fenwick tree
         for (i in arr.indices) {

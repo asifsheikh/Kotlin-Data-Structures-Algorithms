@@ -1,6 +1,6 @@
 package data_structure.fenwicktrees.algorithms
 
-import data_structure.fenwicktrees.FenwickTreeCreation
+import data_structure.fenwicktrees.BasicFenwickTreeCreation
 
 /**
  * INVERSION COUNT ALGORITHM
@@ -25,7 +25,7 @@ object InversionCount {
      */
     fun countInversions(arr: IntArray): Long {
         val n = arr.size
-        val fenwick = FenwickTreeCreation.FenwickTree(n)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(n)
         
         // Coordinate compression
         val sorted = arr.sorted()
@@ -54,7 +54,7 @@ object InversionCount {
      */
     fun countInversionsWithDuplicates(arr: IntArray): Long {
         val n = arr.size
-        val fenwick = FenwickTreeCreation.FenwickTree(n)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(n)
         
         // Coordinate compression with stable sorting
         val indexed = arr.withIndex().toList()
@@ -80,7 +80,7 @@ object InversionCount {
      */
     fun countInversions2D(points: List<Pair<Int, Int>>): Long {
         val n = points.size
-        val fenwick = FenwickTreeCreation.FenwickTree(n)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(n)
         
         // Sort by x-coordinate, then by y-coordinate
         val sorted = points.withIndex().sortedWith(
@@ -138,7 +138,7 @@ object InversionCount {
      */
     fun countInversionsForEachElement(arr: IntArray): List<Long> {
         val n = arr.size
-        val fenwick = FenwickTreeCreation.FenwickTree(n)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(n)
         val results = mutableListOf<Long>()
         
         // Coordinate compression
@@ -170,7 +170,7 @@ object InversionCount {
         comparator: (Int, Int) -> Int
     ): Long {
         val n = arr.size
-        val fenwick = FenwickTreeCreation.FenwickTree(n)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(n)
         
         // Create ranking based on custom comparator
         val indexed = arr.withIndex().toList()

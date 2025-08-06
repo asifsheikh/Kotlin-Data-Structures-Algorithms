@@ -1,6 +1,6 @@
 package data_structure.fenwicktrees.algorithms
 
-import data_structure.fenwicktrees.FenwickTreeCreation
+import data_structure.fenwicktrees.BasicFenwickTreeCreation
 
 /**
  * FREQUENCY QUERIES ALGORITHM
@@ -25,7 +25,7 @@ object FrequencyQueries {
      */
     fun frequencyQuery(arr: IntArray, queries: List<Int>): List<Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {
@@ -50,7 +50,7 @@ object FrequencyQueries {
         operations: List<Pair<String, Int>>
     ): List<Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         val frequency = mutableMapOf<Int, Int>()
         
         // Initialize frequencies
@@ -90,7 +90,7 @@ object FrequencyQueries {
         queries: List<Triple<Int, Int, Int>>
     ): List<Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         val results = mutableListOf<Int>()
         
         for ((left, right, target) in queries) {
@@ -113,7 +113,7 @@ object FrequencyQueries {
      */
     fun mostFrequentElement(arr: IntArray): Int {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {
@@ -139,7 +139,7 @@ object FrequencyQueries {
      */
     fun kthMostFrequent(arr: IntArray, k: Int): Int {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {
@@ -166,7 +166,7 @@ object FrequencyQueries {
      */
     fun elementsWithFrequencyGreaterThan(arr: IntArray, threshold: Int): List<Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {
@@ -190,7 +190,7 @@ object FrequencyQueries {
      */
     fun frequencyHistogram(arr: IntArray): Map<Int, Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {
@@ -218,7 +218,7 @@ object FrequencyQueries {
         for (i in 0..arr.size - windowSize) {
             val window = arr.slice(i until i + windowSize)
             val maxElement = window.maxOrNull() ?: 0
-            val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+            val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
             
             // Count frequencies in window
             for (element in window) {
@@ -247,7 +247,7 @@ object FrequencyQueries {
         operations: List<Triple<String, Int, Int>>
     ): List<Int> {
         val maxElement = initialArr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         val frequency = mutableMapOf<Int, Int>()
         
         // Initialize frequencies
@@ -294,7 +294,7 @@ object FrequencyQueries {
         comparator: (Int, Int) -> Int
     ): Map<Int, Int> {
         val maxElement = arr.maxOrNull() ?: 0
-        val fenwick = FenwickTreeCreation.FenwickTree(maxElement + 1)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
         // Count frequencies
         for (element in arr) {

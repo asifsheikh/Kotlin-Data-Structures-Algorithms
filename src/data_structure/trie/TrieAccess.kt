@@ -14,8 +14,8 @@ object TrieAccess {
     fun allTrieAccessMethods() {
         // Create trie within function - standalone
         val words = listOf("apple", "banana", "apricot", "blueberry", "cherry")
-        val trie = TrieCreation.createBasicTrie(words)
-        val enhancedTrie = TrieCreation.createEnhancedTrie(words)
+        val trie = BasicTrieCreation.createBasicTrie(words)
+        val enhancedTrie = EnhancedTrieCreation.createEnhancedTrie(words)
         
         // === BASIC SEARCH OPERATIONS ===
         val hasApple = searchWord(trie, "apple")                  // true
@@ -203,7 +203,7 @@ object TrieAccess {
     /**
      * Check if trie has character at root
      */
-    private fun hasCharacter(trie: TrieCreation.TrieNode, char: Char): Boolean {
+    private fun hasCharacter(trie: BasicTrieCreation.TrieNode, char: Char): Boolean {
         val index = char.lowercaseChar() - 'a'
         return index in 0..25 && trie.children[index] != null
     }
@@ -211,7 +211,7 @@ object TrieAccess {
     /**
      * Get children of character at root
      */
-    private fun getChildren(trie: TrieCreation.TrieNode, char: Char): TrieCreation.TrieNode? {
+    private fun getChildren(trie: BasicTrieCreation.TrieNode, char: Char): BasicTrieCreation.TrieNode? {
         val index = char.lowercaseChar() - 'a'
         return if (index in 0..25) trie.children[index] else null
     }
@@ -219,8 +219,8 @@ object TrieAccess {
     /**
      * Get path to node
      */
-    private fun getPath(trie: TrieCreation.TrieNode, word: String): List<TrieCreation.TrieNode>? {
-        val path = mutableListOf<TrieCreation.TrieNode>()
+    private fun getPath(trie: BasicTrieCreation.TrieNode, word: String): List<BasicTrieCreation.TrieNode>? {
+        val path = mutableListOf<BasicTrieCreation.TrieNode>()
         var node = trie
         path.add(node)
         
@@ -240,7 +240,7 @@ object TrieAccess {
     /**
      * Get depth of word
      */
-    private fun getDepth(trie: TrieCreation.TrieNode, word: String): Int {
+    private fun getDepth(trie: BasicTrieCreation.TrieNode, word: String): Int {
         var node = trie
         var depth = 0
         
@@ -260,15 +260,15 @@ object TrieAccess {
     /**
      * Get maximum depth of trie
      */
-    private fun getMaxDepth(trie: TrieCreation.TrieNode): Int {
+    private fun getMaxDepth(trie: BasicTrieCreation.TrieNode): Int {
         return getMaxDepthRecursive(trie)
     }
     
     /**
      * Get all leaf nodes
      */
-    private fun getLeafNodes(trie: TrieCreation.TrieNode): List<TrieCreation.TrieNode> {
-        val leaves = mutableListOf<TrieCreation.TrieNode>()
+    private fun getLeafNodes(trie: BasicTrieCreation.TrieNode): List<BasicTrieCreation.TrieNode> {
+        val leaves = mutableListOf<BasicTrieCreation.TrieNode>()
         collectLeafNodes(trie, leaves)
         return leaves
     }
@@ -276,15 +276,15 @@ object TrieAccess {
     /**
      * Get all leaf words
      */
-    private fun getLeafWords(trie: TrieCreation.TrieNode): List<String> {
+    private fun getLeafWords(trie: BasicTrieCreation.TrieNode): List<String> {
         return getAllWords(trie)
     }
     
     /**
      * Get all non-leaf nodes
      */
-    private fun getNonLeafNodes(trie: TrieCreation.TrieNode): List<TrieCreation.TrieNode> {
-        val nonLeaves = mutableListOf<TrieCreation.TrieNode>()
+    private fun getNonLeafNodes(trie: BasicTrieCreation.TrieNode): List<BasicTrieCreation.TrieNode> {
+        val nonLeaves = mutableListOf<BasicTrieCreation.TrieNode>()
         collectNonLeafNodes(trie, nonLeaves)
         return nonLeaves
     }
@@ -292,7 +292,7 @@ object TrieAccess {
     /**
      * Get all words in trie
      */
-    private fun getAllWords(trie: TrieCreation.TrieNode): List<String> {
+    private fun getAllWords(trie: BasicTrieCreation.TrieNode): List<String> {
         val words = mutableListOf<String>()
         collectWords(trie, "", words)
         return words

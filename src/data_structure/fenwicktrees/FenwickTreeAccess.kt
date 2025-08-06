@@ -13,8 +13,8 @@ object FenwickTreeAccess {
      */
     fun allFenwickTreeAccessMethods() {
         // Create Fenwick tree within function - standalone
-        val fenwick = FenwickTreeCreation.FenwickTree(10)
-        val enhancedFenwick = FenwickTreeCreation.EnhancedFenwickTree(10)
+        val fenwick = BasicFenwickTreeCreation.FenwickTree(10)
+        val enhancedFenwick = EnhancedFenwickTreeCreation.EnhancedFenwickTree(10)
         
         // Initialize with some values
         for (i in 0 until 10) {
