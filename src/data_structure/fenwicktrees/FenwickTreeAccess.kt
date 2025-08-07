@@ -125,7 +125,7 @@ object FenwickTreeAccess {
     }
     
     // Helper methods for advanced access operations
-    private fun binarySearchPrefixSum(fenwick: FenwickTreeCreation.FenwickTree, targetSum: Long): Int {
+    private fun binarySearchPrefixSum(fenwick: BasicFenwickTreeCreation.FenwickTree, targetSum: Long): Int {
         var left = 0
         var right = fenwick.getSize() - 1
         var result = -1
@@ -145,12 +145,12 @@ object FenwickTreeAccess {
         return result
     }
     
-    private fun findKthElement(fenwick: FenwickTreeCreation.FenwickTree, k: Int): Long {
+    private fun findKthElement(fenwick: BasicFenwickTreeCreation.FenwickTree, k: Int): Long {
         if (k < 1 || k > fenwick.getSize()) return -1L
         return fenwick.query(k - 1) - fenwick.query(k - 2)
     }
     
-    private fun findKthLargest(fenwick: FenwickTreeCreation.FenwickTree, k: Int): Long {
+    private fun findKthLargest(fenwick: BasicFenwickTreeCreation.FenwickTree, k: Int): Long {
         // This is a simplified version - in practice, you'd need a more complex approach
         val elements = mutableListOf<Long>()
         for (i in 0 until fenwick.getSize()) {
@@ -159,13 +159,13 @@ object FenwickTreeAccess {
         return elements.sortedDescending()[k - 1]
     }
     
-    private fun findMedian(fenwick: FenwickTreeCreation.FenwickTree): Double {
+    private fun findMedian(fenwick: BasicFenwickTreeCreation.FenwickTree): Double {
         val size = fenwick.getSize()
         val totalSum = fenwick.query(size - 1)
         return totalSum / size.toDouble()
     }
     
-    private fun findMode(fenwick: FenwickTreeCreation.FenwickTree): Long {
+    private fun findMode(fenwick: BasicFenwickTreeCreation.FenwickTree): Long {
         val frequencyMap = mutableMapOf<Long, Int>()
         for (i in 0 until fenwick.getSize()) {
             val element = fenwick.query(i) - fenwick.query(i - 1)

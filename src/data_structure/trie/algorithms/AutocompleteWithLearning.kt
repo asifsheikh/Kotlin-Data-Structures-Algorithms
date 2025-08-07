@@ -37,7 +37,7 @@ object AutocompleteWithLearning {
     }
     
     // Helper methods
-    private fun updateWordFrequency(root: TrieCreation.EnhancedTrieNode, word: String) {
+    private fun updateWordFrequency(root: EnhancedTrieCreation.EnhancedTrieNode, word: String) {
         var node = root
         for (char in word) {
             if (!node.children.containsKey(char)) {
@@ -50,7 +50,7 @@ object AutocompleteWithLearning {
         }
     }
     
-    private fun autocompleteWithFrequency(root: TrieCreation.EnhancedTrieNode, prefix: String, k: Int): List<String> {
+    private fun autocompleteWithFrequency(root: EnhancedTrieCreation.EnhancedTrieNode, prefix: String, k: Int): List<String> {
         var node = root
         
         // Traverse to the prefix node
@@ -69,7 +69,7 @@ object AutocompleteWithLearning {
     }
     
     private fun collectWordsWithFrequency(
-        node: TrieCreation.EnhancedTrieNode, 
+        node: EnhancedTrieCreation.EnhancedTrieNode, 
         prefix: String, 
         result: MutableList<Pair<String, Int>>
     ) {

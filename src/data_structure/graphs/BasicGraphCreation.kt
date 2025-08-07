@@ -80,7 +80,7 @@ object BasicGraphCreation {
         
         // === WITH SORTING ===
         val unsortedEdges = listOf(2 to 3, 0 to 1, 1 to 2)
-        val sortedEdges = unsortedEdges.sorted()
+        val sortedEdges = unsortedEdges.sortedWith(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
         val graphFromSorted = createFromSorted(unsortedEdges)       // Graph with sorted edges
         
         // === WITH DEDUPLICATION ===
@@ -293,7 +293,7 @@ object BasicGraphCreation {
      * Creates graph with sorted edges
      */
     fun createFromSorted(edges: List<Pair<Int, Int>>): MutableMap<Int, MutableList<Int>> {
-        val sortedEdges = edges.sorted()
+        val sortedEdges = edges.sortedWith(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
         return createFromEdgesPairs(sortedEdges)
     }
     

@@ -120,7 +120,7 @@ object FrequencyQueries {
             fenwick.update(element, 1)
         }
         
-        var maxFreq = 0
+        var maxFreq = 0L
         var mostFrequent = -1
         
         for (element in 0..maxElement) {
@@ -147,7 +147,7 @@ object FrequencyQueries {
         }
         
         // Create list of (element, frequency) pairs
-        val frequencies = mutableListOf<Pair<Int, Int>>()
+        val frequencies = mutableListOf<Pair<Int, Long>>()
         for (element in 0..maxElement) {
             val freq = fenwick.query(element) - fenwick.query(element - 1)
             if (freq > 0) {
@@ -188,7 +188,7 @@ object FrequencyQueries {
     /**
      * Frequency histogram
      */
-    fun frequencyHistogram(arr: IntArray): Map<Int, Int> {
+    fun frequencyHistogram(arr: IntArray): Map<Int, Long> {
         val maxElement = arr.maxOrNull() ?: 0
         val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
@@ -197,7 +197,7 @@ object FrequencyQueries {
             fenwick.update(element, 1)
         }
         
-        val histogram = mutableMapOf<Int, Int>()
+        val histogram = mutableMapOf<Int, Long>()
         
         for (element in 0..maxElement) {
             val freq = fenwick.query(element) - fenwick.query(element - 1)
@@ -212,8 +212,8 @@ object FrequencyQueries {
     /**
      * Frequency with sliding window
      */
-    fun frequencySlidingWindow(arr: IntArray, windowSize: Int): List<Map<Int, Int>> {
-        val results = mutableListOf<Map<Int, Int>>()
+    fun frequencySlidingWindow(arr: IntArray, windowSize: Int): List<Map<Int, Long>> {
+        val results = mutableListOf<Map<Int, Long>>()
         
         for (i in 0..arr.size - windowSize) {
             val window = arr.slice(i until i + windowSize)
@@ -225,7 +225,7 @@ object FrequencyQueries {
                 fenwick.update(element, 1)
             }
             
-            val histogram = mutableMapOf<Int, Int>()
+            val histogram = mutableMapOf<Int, Long>()
             for (element in 0..maxElement) {
                 val freq = fenwick.query(element) - fenwick.query(element - 1)
                 if (freq > 0) {
@@ -292,7 +292,7 @@ object FrequencyQueries {
     fun frequencyWithCustomComparator(
         arr: IntArray,
         comparator: (Int, Int) -> Int
-    ): Map<Int, Int> {
+    ): Map<Int, Long> {
         val maxElement = arr.maxOrNull() ?: 0
         val fenwick = BasicFenwickTreeCreation.FenwickTree(maxElement + 1)
         
@@ -301,7 +301,7 @@ object FrequencyQueries {
             fenwick.update(element, 1)
         }
         
-        val histogram = mutableMapOf<Int, Int>()
+        val histogram = mutableMapOf<Int, Long>()
         
         for (element in 0..maxElement) {
             val freq = fenwick.query(element) - fenwick.query(element - 1)

@@ -348,7 +348,7 @@ object TrieAccess {
     }
     
     // Enhanced trie methods
-    private fun searchWordEnhanced(trie: TrieCreation.EnhancedTrieNode, word: String): Boolean {
+    private fun searchWordEnhanced(trie: EnhancedTrieCreation.EnhancedTrieNode, word: String): Boolean {
         var node = trie
         for (char in word) {
             if (!node.children.containsKey(char)) {
@@ -359,7 +359,7 @@ object TrieAccess {
         return node.isEndOfWord
     }
     
-    private fun findWordsWithPrefixEnhanced(trie: TrieCreation.EnhancedTrieNode, prefix: String): List<String> {
+    private fun findWordsWithPrefixEnhanced(trie: EnhancedTrieCreation.EnhancedTrieNode, prefix: String): List<String> {
         val result = mutableListOf<String>()
         var node = trie
         
@@ -374,7 +374,7 @@ object TrieAccess {
         return result
     }
     
-    private fun countWordsEnhanced(trie: TrieCreation.EnhancedTrieNode): Int {
+    private fun countWordsEnhanced(trie: EnhancedTrieCreation.EnhancedTrieNode): Int {
         return countWordsRecursiveEnhanced(trie)
     }
     
@@ -444,7 +444,7 @@ object TrieAccess {
         }
     }
     
-    private fun collectWordsEnhanced(node: TrieCreation.EnhancedTrieNode, prefix: String, result: MutableList<String>) {
+    private fun collectWordsEnhanced(node: EnhancedTrieCreation.EnhancedTrieNode, prefix: String, result: MutableList<String>) {
         if (node.isEndOfWord) {
             result.add(prefix)
         }
@@ -453,7 +453,7 @@ object TrieAccess {
         }
     }
     
-    private fun countWordsRecursiveEnhanced(node: TrieCreation.EnhancedTrieNode): Int {
+    private fun countWordsRecursiveEnhanced(node: EnhancedTrieCreation.EnhancedTrieNode): Int {
         var count = if (node.isEndOfWord) 1 else 0
         for (child in node.children.values) {
             count += countWordsRecursiveEnhanced(child)

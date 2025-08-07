@@ -290,7 +290,7 @@ object DirectedGraphCreation {
      * Creates directed graph with sorted edges
      */
     fun createFromSorted(edges: List<Pair<Int, Int>>): MutableMap<Int, MutableList<Int>> {
-        val sortedEdges = edges.sorted()
+        val sortedEdges = edges.sortedWith(compareBy<Pair<Int, Int>> { it.first }.thenBy { it.second })
         return createFromEdges(sortedEdges)
     }
     
