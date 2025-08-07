@@ -619,7 +619,7 @@ object UnionFindAlgorithms {
             intArrayOf(1, 3),
             intArrayOf(2, 3) // This is redundant
         )
-        val redundant = findRedundantConnection(redundantEdges, 3)
+        val redundant = findRedundantConnection(redundantEdges, 4)
         println("Edges: ${redundantEdges.contentDeepToString()}")
         println("Redundant edge: ${redundant?.contentToString()}")
         println()
