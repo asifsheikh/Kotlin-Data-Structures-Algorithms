@@ -11,6 +11,8 @@ import data_structure.linkedlists.*
 import data_structure.unionfind.*
 import data_structure.trees.*
 import data_structure.graphs.*
+import bit_manipulation.*
+import bit_manipulation.algorithms.*
 import algos.dp.*
 import algos.sorting.*
 import algos.searching.*
@@ -88,24 +90,32 @@ fun main() {
     println("   - BFS.demonstrateBFS()")
     println()
     
+    println("14. BIT MANIPULATION")
+    BitManipulationBasics.allBitManipulationBasics()
+    BitManipulationOperations.allBitManipulationOperations()
+    BitManipulationUtilities.allBitManipulationUtilities()
+    SingleNumber.demonstrateSingleNumberAlgorithms()
+    PowerOfTwo.demonstratePowerOfTwoAlgorithms()
+    println()
+    
     // ===== ALGORITHMS =====
-    println("14. CLASSIC DYNAMIC PROGRAMMING")
+    println("15. CLASSIC DYNAMIC PROGRAMMING")
     ClassicDP.demonstrateClassicDP()
     
-    println("15. ONE-DIMENSIONAL DYNAMIC PROGRAMMING")
+    println("16. ONE-DIMENSIONAL DYNAMIC PROGRAMMING")
     OneDimensionalDP.demonstrateOneDimensionalDP()
     
-    println("16. TWO-DIMENSIONAL DYNAMIC PROGRAMMING")
+    println("17. TWO-DIMENSIONAL DYNAMIC PROGRAMMING")
     TwoDimensionalDP.demonstrateTwoDimensionalDP()
     
-    println("17. KNAPSACK DYNAMIC PROGRAMMING")
+    println("18. KNAPSACK DYNAMIC PROGRAMMING")
     KnapsackDP.demonstrateKnapsackDP()
     
-    println("18. SORTING ALGORITHMS")
+    println("19. SORTING ALGORITHMS")
     sortingAlgorithms()
     println()
     
-    println("19. SEARCHING ALGORITHMS")
+    println("20. SEARCHING ALGORITHMS")
     searchingAlgorithms()
     println()
     
