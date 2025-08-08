@@ -12,10 +12,8 @@ This repository serves as a complete reference for learning and implementing fun
 
 - [Features](#-features)
 - [Quick Start](#-quick-start)
-- [Data Structures](#-data-structures)
-- [Algorithms](#-algorithms)
-- [Usage Examples](#-usage-examples)
 - [Complexity Reference](#-complexity-reference)
+- [Learning Path](#-learning-path)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -55,111 +53,41 @@ This repository serves as a complete reference for learning and implementing fun
    ./gradlew run
    ```
 
-## 📊 Data Structures
-
-### Arrays
-- **Searching Algorithms**
-  - Linear Search (basic, sentinel, recursive)
-  - Binary Search (basic, recursive, first/last occurrence)
-  - Peak Finding
-  - Missing Number Detection
-
-- **Sorting Algorithms**
-  - QuickSort (Lomuto, Hoare, randomized, median-of-three)
-  - MergeSort (basic, in-place, bottom-up, linked list)
-  - More coming soon...
-
-- **Array Operations**
-  - Rotation (left, right, juggling algorithm)
-  - Transformation (map, filter, reshape, concatenate)
-  - Validation (sorted, duplicates, palindrome, monotonic)
-  - Statistics (mean, median, mode, variance)
-  - Manipulation (insert, remove, replace, shift)
-
-### Popular Problems
-- **Two Sum** - Multiple approaches (hash map, two pointers, BST)
-- **Maximum Subarray Sum** - Kadane's algorithm with variations
-- More coming soon...
-
-## 🔍 Algorithms
-
-### Searching
-```kotlin
-// Linear Search
-val arr = intArrayOf(4, 2, 7, 1, 9, 3, 6)
-val index = LinearSearch.search(arr, 7) // Returns 2
-
-// Binary Search
-val sortedArr = intArrayOf(1, 2, 3, 4, 5, 6, 7)
-val binIndex = BinarySearch.search(sortedArr, 5) // Returns 4
-```
-
-### Sorting
-```kotlin
-// QuickSort
-val unsorted = intArrayOf(64, 34, 25, 12, 22, 11, 90)
-QuickSort.sort(unsorted) // Sorts in-place
-
-// MergeSort
-val arr = intArrayOf(38, 27, 43, 3, 9, 82, 10)
-MergeSort.sort(arr) // Sorts in-place
-```
-
-### Array Operations
-```kotlin
-// Rotation
-val rotateArr = intArrayOf(1, 2, 3, 4, 5, 6, 7)
-ArrayRotation.rotateLeft(rotateArr, 2) // [3, 4, 5, 6, 7, 1, 2]
-
-// Validation
-val palindrome = intArrayOf(1, 2, 2, 1)
-val isPal = ArrayValidation.isArrayPalindrome(palindrome) // true
-```
-
-### Popular Problems
-```kotlin
-// Two Sum
-val nums = intArrayOf(2, 7, 11, 15)
-val result = TwoSum.findIndices(nums, 9) // [0, 1]
-
-// Maximum Subarray Sum
-val arr = intArrayOf(-2, 1, -3, 4, -1, 2, 1, -5, 4)
-val maxSum = MaxSubarraySum.kadaneAlgorithm(arr) // 6
-```
-
 ## 📈 Complexity Reference
 
-| Algorithm Category | Time Complexity | Space Complexity |
-|-------------------|----------------|------------------|
-| **Linear Search** | O(n) | O(1) |
-| **Binary Search** | O(log n) | O(1) |
-| **QuickSort** | O(n log n) avg, O(n²) worst | O(log n) |
-| **MergeSort** | O(n log n) | O(n) |
-| **Array Rotation** | O(n) | O(1) |
-| **Array Validation** | O(n) | O(1) |
-| **Two Sum** | O(n) | O(n) |
-| **Kadane's Algorithm** | O(n) | O(1) |
+| Algorithm/Structure | Time Complexity | Space Complexity |
+|---------------------|-----------------|------------------|
+| **Hash Map (get/put/remove)** | O(1) avg, O(n) worst | O(n) |
+| **Set (contains/add/remove)** | O(1) avg, O(n) worst | O(n) |
+| **Stack (push/pop/peek)** | O(1) | O(1) |
+| **Queue (enqueue/dequeue)** | O(1) | O(1) |
+| **Binary Heap (insert/extract-min,max)** | O(log n) | O(n) |
+| **Binary Heap (find-min,max)** | O(1) | O(1) |
+| **Heapify** | O(n) | O(1) |
+| **Union-Find (DSU, amortized)** | ~O(1) (α(n)) | O(n) |
+| **Trie (insert/search/prefix)** | O(L) | O(total chars) |
+| **Fenwick Tree (update/prefix sum)** | O(log n) | O(n) |
+| **Fenwick Tree (build)** | O(n) | O(n) |
+| **BST (avg ops; worst in parentheses)** | O(log n) avg (O(n) worst) | O(n) |
+| **AVL/Red-Black Tree (ops)** | O(log n) | O(n) |
+| **Tree traversals (DFS/BFS on tree)** | O(n) | O(h) |
+| **Graph BFS/DFS** | O(V + E) | O(V) |
+| **Topological Sort** | O(V + E) | O(V) |
+| **Dijkstra (binary heap)** | O((V + E) log V) | O(V + E) |
+| **Bellman–Ford** | O(VE) | O(V) |
+| **Floyd–Warshall** | O(V^3) | O(V^2) |
+| **Kruskal (with DSU)** | O(E log V) | O(V) |
+| **Prim (binary heap)** | O(E log V) | O(V) |
+| **Shortest Path in DAG** | O(V + E) | O(V) |
+| **Edit Distance (Levenshtein)** | O(nm) | O(nm) |
+| **0/1 Knapsack** | O(nW) | O(nW) |
+| **LIS (n log n approach)** | O(n log n) | O(n) |
+| **Sieve of Eratosthenes** | O(n log log n) | O(n) |
+| **Euclidean GCD** | O(log min(a, b)) | O(1) |
 
 ## 🏗️ Project Structure
 
-```
-src/data_structure/arrays/algorithms/
-├── searching/              # Search algorithms
-│   ├── LinearSearch.kt     # Linear search variations
-│   └── BinarySearch.kt     # Binary search variations
-├── sorting/               # Sorting algorithms
-│   ├── QuickSort.kt       # QuickSort implementations
-│   └── MergeSort.kt       # MergeSort implementations
-├── rotation/              # Array rotation
-├── transformation/        # Array transformations
-├── validation/           # Array validation
-├── statistics/           # Statistical algorithms
-├── manipulation/         # Array manipulation
-├── problems/             # Popular problems
-│   ├── TwoSum.kt         # Two Sum problem
-│   └── MaxSubarraySum.kt # Kadane's algorithm
-└── README.md             # Detailed documentation
-```
+Removed for brevity.
 
 ## 🎯 Learning Path
 
@@ -195,18 +123,6 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 ## 📝 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Inspired by various algorithm textbooks and online resources
-- Built with ❤️ for the Kotlin community
-- Special thanks to all contributors and the open-source community
-
-## 📞 Contact
-
-- **Repository**: [Kotlin-Data-Structures-Algorithms](https://github.com/yourusername/Kotlin-Data-Structures-Algorithms)
-- **Issues**: [GitHub Issues](https://github.com/yourusername/Kotlin-Data-Structures-Algorithms/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/Kotlin-Data-Structures-Algorithms/discussions)
 
 ---
 
