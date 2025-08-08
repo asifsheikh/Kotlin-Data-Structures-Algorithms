@@ -21,6 +21,10 @@ object WeightedGraph {
     class WeightedGraph {
         private val graph = mutableMapOf<Int, MutableList<Pair<Int, Int>>>() // (node, weight)
         
+        /**
+         * Time Complexity: addEdge O(1)
+         * Space Complexity: O(E) overall for stored edges
+         */
         fun addEdge(u: Int, v: Int, weight: Int, directed: Boolean = true) {
             graph.computeIfAbsent(u) { mutableListOf() }.add(v to weight)
             if (!directed) {
@@ -28,10 +32,16 @@ object WeightedGraph {
             }
         }
         
+        /**
+         * Time Complexity: O(1)
+         */
         fun getNeighbors(node: Int): List<Pair<Int, Int>> {
             return graph[node] ?: emptyList()
         }
         
+        /**
+         * Time Complexity: O(E)
+         */
         fun getAllEdges(): List<WeightedEdge> {
             val edges = mutableListOf<WeightedEdge>()
             for ((u, neighbors) in graph) {
@@ -42,6 +52,9 @@ object WeightedGraph {
             return edges
         }
         
+        /**
+         * Time Complexity: O(V)
+         */
         fun getNodes(): Set<Int> {
             return graph.keys
         }
@@ -55,6 +68,10 @@ object WeightedGraph {
     }
     
     // ===== KRUSKAL'S ALGORITHM (MINIMUM SPANNING TREE) =====
+    /**
+     * Time Complexity: O(E log E) ≈ O(E log V) with sorting and DSU
+     * Space Complexity: O(V + E)
+     */
     fun kruskalMST(graph: WeightedGraph): List<WeightedEdge> {
         val edges = graph.getAllEdges().sorted()
         val unionFind = UnionFind(graph.getNodes().size)
@@ -71,6 +88,10 @@ object WeightedGraph {
     }
     
     // ===== PRIM'S ALGORITHM (MINIMUM SPANNING TREE) =====
+    /**
+     * Time Complexity: O(E log V) with binary heap
+     * Space Complexity: O(V + E)
+     */
     fun primMST(graph: WeightedGraph, start: Int): List<WeightedEdge> {
         val visited = mutableSetOf<Int>()
         val pq = java.util.PriorityQueue<WeightedEdge>()
@@ -103,11 +124,19 @@ object WeightedGraph {
     }
     
     // ===== MINIMUM SPANNING TREE WEIGHT =====
+    /**
+     * Time Complexity: O(E)
+     * Space Complexity: O(1)
+     */
     fun mstWeight(edges: List<WeightedEdge>): Int {
         return edges.sumOf { it.weight }
     }
     
     // ===== SECOND MINIMUM SPANNING TREE =====
+    /**
+     * Time Complexity: O(E log E + E * T_MST) — depends on MST recomputation per exclusion
+     * Space Complexity: O(V + E)
+     */
     fun secondMST(graph: WeightedGraph): List<WeightedEdge>? {
         val mst = kruskalMST(graph)
         var secondMst: List<WeightedEdge>? = null
@@ -138,6 +167,10 @@ object WeightedGraph {
     }
     
     // ===== MAXIMUM SPANNING TREE =====
+    /**
+     * Time Complexity: O(E log E)
+     * Space Complexity: O(V + E)
+     */
     fun maxSpanningTree(graph: WeightedGraph): List<WeightedEdge> {
         val edges = graph.getAllEdges().sortedDescending()
         val unionFind = UnionFind(graph.getNodes().size)
@@ -154,6 +187,10 @@ object WeightedGraph {
     }
     
     // ===== SHORTEST PATH IN WEIGHTED GRAPH =====
+    /**
+     * Time Complexity: O((V + E) log V) using Dijkstra
+     * Space Complexity: O(V + E)
+     */
     fun shortestPathWeighted(graph: WeightedGraph, start: Int, end: Int): Int {
         val distances = mutableMapOf<Int, Int>()
         val pq = java.util.PriorityQueue<Pair<Int, Int>>(compareBy { it.second })
@@ -185,6 +222,10 @@ object WeightedGraph {
     }
     
     // ===== ALL PAIRS SHORTEST PATH (FLOYD-WARSHALL) =====
+    /**
+     * Time Complexity: O(V^3)
+     * Space Complexity: O(V^2)
+     */
     fun allPairsShortestPath(graph: WeightedGraph): Array<IntArray> {
         val nodes = graph.getNodes().toList()
         val n = nodes.size
@@ -218,6 +259,10 @@ object WeightedGraph {
     }
     
     // ===== NEGATIVE CYCLE DETECTION =====
+    /**
+     * Time Complexity: O(V^3) via repeated relaxation (Floyd-Warshall based approach here)
+     * Space Complexity: O(V^2)
+     */
     fun hasNegativeCycle(graph: WeightedGraph): Boolean {
         val nodes = graph.getNodes().toList()
         val n = nodes.size
@@ -256,6 +301,10 @@ object WeightedGraph {
     }
     
     // ===== MINIMUM COST TO CONNECT ALL POINTS =====
+    /**
+     * Time Complexity: O(n^2 log n) — building all edges then Kruskal
+     * Space Complexity: O(n^2)
+     */
     fun minCostConnectPoints(points: Array<IntArray>): Int {
         val n = points.size
         val edges = mutableListOf<WeightedEdge>()
@@ -285,6 +334,10 @@ object WeightedGraph {
     }
     
     // ===== NETWORK DELAY TIME =====
+    /**
+     * Time Complexity: O((V + E) log V)
+     * Space Complexity: O(V + E)
+     */
     fun networkDelayTime(times: Array<IntArray>, n: Int, k: Int): Int {
         val graph = WeightedGraph()
         
@@ -300,6 +353,10 @@ object WeightedGraph {
     }
     
     // ===== CHEAPEST FLIGHTS WITHIN K STOPS =====
+    /**
+     * Time Complexity: O(E log V + V log V * K) approximately due to PQ over (node, stops)
+     * Space Complexity: O(VK + E)
+     */
     fun findCheapestPrice(n: Int, flights: Array<IntArray>, src: Int, dst: Int, k: Int): Int {
         val graph = WeightedGraph()
         

@@ -13,6 +13,10 @@ package data_structure.graphs
 object ShortestPath {
     
     // ===== DIJKSTRA'S ALGORITHM =====
+    /**
+     * Time Complexity: O((V + E) log V) with a binary heap priority queue
+     * Space Complexity: O(V + E)
+     */
     fun dijkstra(graph: Map<Int, List<Pair<Int, Int>>>, start: Int): Map<Int, Int> {
         val distances = mutableMapOf<Int, Int>()
         val pq = java.util.PriorityQueue<Pair<Int, Int>>(compareBy { it.second })
@@ -44,6 +48,10 @@ object ShortestPath {
     }
     
     // ===== DIJKSTRA WITH PATH TRACKING =====
+    /**
+     * Time Complexity: O((V + E) log V)
+     * Space Complexity: O(V + E)
+     */
     fun dijkstraWithPath(graph: Map<Int, List<Pair<Int, Int>>>, start: Int): Pair<Map<Int, Int>, Map<Int, Int>> {
         val distances = mutableMapOf<Int, Int>()
         val previous = mutableMapOf<Int, Int>()
@@ -75,6 +83,10 @@ object ShortestPath {
         return Pair(distances, previous)
     }
     
+    /**
+     * Time Complexity: O(L) where L is the path length (≤ V)
+     * Space Complexity: O(L)
+     */
     fun reconstructPath(previous: Map<Int, Int>, start: Int, end: Int): List<Int>? {
         if (end !in previous && end != start) return null
         
@@ -91,6 +103,10 @@ object ShortestPath {
     }
     
     // ===== BELLMAN-FORD ALGORITHM =====
+    /**
+     * Time Complexity: O(VE)
+     * Space Complexity: O(V + E)
+     */
     fun bellmanFord(graph: Map<Int, List<Pair<Int, Int>>>, start: Int): Pair<Map<Int, Int>, Boolean> {
         val distances = mutableMapOf<Int, Int>()
         val edges = mutableListOf<Triple<Int, Int, Int>>()
@@ -124,6 +140,10 @@ object ShortestPath {
     }
     
     // ===== FLOYD-WARSHALL ALGORITHM =====
+    /**
+     * Time Complexity: O(V^3)
+     * Space Complexity: O(V^2)
+     */
     fun floydWarshall(graph: Map<Int, List<Pair<Int, Int>>>): Array<IntArray> {
         val n = graph.keys.maxOrNull()!! + 1
         val dist = Array(n) { IntArray(n) { Int.MAX_VALUE } }
@@ -156,6 +176,10 @@ object ShortestPath {
     }
     
     // ===== BFS FOR UNWEIGHTED GRAPH SHORTEST PATH =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun shortestPathBFS(graph: Map<Int, List<Int>>, start: Int, end: Int): Int {
         val visited = mutableSetOf<Int>()
         val queue = ArrayDeque<Pair<Int, Int>>() // (node, distance)
@@ -180,6 +204,10 @@ object ShortestPath {
     }
     
     // ===== BFS SHORTEST PATH WITH PATH TRACKING =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun shortestPathBFSWithPath(graph: Map<Int, List<Int>>, start: Int, end: Int): List<Int>? {
         val visited = mutableSetOf<Int>()
         val queue = ArrayDeque<Triple<Int, Int, List<Int>>>() // (node, distance, path)
@@ -204,6 +232,10 @@ object ShortestPath {
     }
     
     // ===== MULTI-SOURCE BFS =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun multiSourceBFS(graph: Map<Int, List<Int>>, sources: List<Int>): Map<Int, Int> {
         val distances = mutableMapOf<Int, Int>()
         val queue = ArrayDeque<Int>()
@@ -234,6 +266,10 @@ object ShortestPath {
     }
     
     // ===== 0-1 BFS (FOR GRAPHS WITH 0/1 WEIGHTS) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun zeroOneBFS(graph: Map<Int, List<Pair<Int, Int>>>, start: Int): Map<Int, Int> {
         val distances = mutableMapOf<Int, Int>()
         val deque = ArrayDeque<Int>()
@@ -266,6 +302,10 @@ object ShortestPath {
     }
     
     // ===== SHORTEST PATH IN 2D GRID =====
+    /**
+     * Time Complexity: O(R * C)
+     * Space Complexity: O(R * C)
+     */
     fun shortestPathInGrid(grid: Array<IntArray>, start: Pair<Int, Int>, end: Pair<Int, Int>): Int {
         if (grid.isEmpty()) return -1
         
@@ -305,6 +345,10 @@ object ShortestPath {
     }
     
     // ===== SHORTEST PATH WITH OBSTACLES =====
+    /**
+     * Time Complexity: O(R * C * k)
+     * Space Complexity: O(R * C * k)
+     */
     fun shortestPathWithObstacles(grid: Array<IntArray>, k: Int): Int {
         if (grid.isEmpty()) return -1
         
