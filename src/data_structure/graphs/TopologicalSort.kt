@@ -13,6 +13,10 @@ package data_structure.graphs
 object TopologicalSort {
     
     // ===== KAHN'S ALGORITHM (BFS-BASED) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun kahnAlgorithm(graph: Map<Int, List<Int>>): List<Int>? {
         val inDegree = mutableMapOf<Int, Int>()
         val queue = ArrayDeque<Int>()
@@ -56,6 +60,10 @@ object TopologicalSort {
     }
     
     // ===== DFS-BASED TOPOLOGICAL SORT =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun dfsTopologicalSort(graph: Map<Int, List<Int>>): List<Int>? {
         val visited = mutableSetOf<Int>()
         val stack = mutableListOf<Int>()
@@ -92,6 +100,10 @@ object TopologicalSort {
     }
     
     // ===== TOPOLOGICAL SORT WITH CYCLE DETECTION =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun topologicalSortWithCycleDetection(graph: Map<Int, List<Int>>): Pair<List<Int>?, Boolean> {
         val visited = mutableSetOf<Int>()
         val stack = mutableListOf<Int>()
@@ -132,6 +144,11 @@ object TopologicalSort {
     }
     
     // ===== ALL POSSIBLE TOPOLOGICAL SORTS =====
+    /**
+     * Time Complexity: O(K * (V + E)) where K is the number of valid topological orders
+     *   (worst-case exponential; up to O(V!))
+     * Space Complexity: O(V)
+     */
     fun allTopologicalSorts(graph: Map<Int, List<Int>>): List<List<Int>> {
         val inDegree = mutableMapOf<Int, Int>()
         val result = mutableListOf<List<Int>>()
@@ -182,6 +199,10 @@ object TopologicalSort {
     }
     
     // ===== TOPOLOGICAL SORT FOR WEIGHTED GRAPH =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun topologicalSortWeighted(graph: Map<Int, List<Pair<Int, Int>>>): List<Int>? {
         val inDegree = mutableMapOf<Int, Int>()
         val queue = ArrayDeque<Int>()
@@ -223,6 +244,10 @@ object TopologicalSort {
     }
     
     // ===== LONGEST PATH IN DAG (USING TOPOLOGICAL SORT) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun longestPathInDAG(graph: Map<Int, List<Pair<Int, Int>>>): Int {
         val topoOrder = topologicalSortWeighted(graph) ?: return -1
         val distances = mutableMapOf<Int, Int>()
@@ -248,6 +273,10 @@ object TopologicalSort {
     }
     
     // ===== SHORTEST PATH IN DAG (USING TOPOLOGICAL SORT) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun shortestPathInDAG(graph: Map<Int, List<Pair<Int, Int>>>, start: Int): Map<Int, Int> {
         val topoOrder = topologicalSortWeighted(graph) ?: return emptyMap()
         val distances = mutableMapOf<Int, Int>()
@@ -273,6 +302,10 @@ object TopologicalSort {
     }
     
     // ===== COURSE SCHEDULE PROBLEM =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V + E)
+     */
     fun canFinishCourses(numCourses: Int, prerequisites: List<List<Int>>): Boolean {
         val graph = mutableMapOf<Int, MutableList<Int>>()
         
@@ -288,6 +321,10 @@ object TopologicalSort {
         return kahnAlgorithm(graph) != null
     }
     
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V + E)
+     */
     fun findOrder(numCourses: Int, prerequisites: List<List<Int>>): IntArray {
         val graph = mutableMapOf<Int, MutableList<Int>>()
         
@@ -305,6 +342,11 @@ object TopologicalSort {
     }
     
     // ===== ALIEN DICTIONARY PROBLEM =====
+    /**
+     * Let T be total characters across all words, U the number of unique characters, and E the number of precedence edges.
+     * Time Complexity: O(T + U + E)
+     * Space Complexity: O(U + E)
+     */
     fun alienOrder(words: List<String>): String {
         val graph = mutableMapOf<Char, MutableList<Char>>()
         val inDegree = mutableMapOf<Char, Int>()
