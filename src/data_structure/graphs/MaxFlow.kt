@@ -9,6 +9,10 @@ package data_structure.graphs
 object MaxFlow {
 
     // Graph represented as capacity matrix (u -> v -> capacity)
+    /**
+     * Time Complexity: O(V * E^2) with Edmonds–Karp
+     * Space Complexity: O(V^2) for residual capacity matrix
+     */
     fun edmondsKarp(capacity: Array<IntArray>, source: Int, sink: Int): Int {
         val n = capacity.size
         val residual = Array(n) { IntArray(n) }

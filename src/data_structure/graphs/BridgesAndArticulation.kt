@@ -12,6 +12,10 @@ package data_structure.graphs
 object BridgesAndArticulation {
 
     // ===== BRIDGES (Critical Connections) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun findBridges(graph: Map<Int, List<Int>>): List<Pair<Int, Int>> {
         val visited = mutableSetOf<Int>()
         val discoveryTime = mutableMapOf<Int, Int>()
@@ -52,6 +56,10 @@ object BridgesAndArticulation {
     }
 
     // ===== ARTICULATION POINTS (Cut Vertices) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun findArticulationPoints(graph: Map<Int, List<Int>>): Set<Int> {
         val visited = mutableSetOf<Int>()
         val discoveryTime = mutableMapOf<Int, Int>()

@@ -7,12 +7,20 @@ package data_structure.graphs
  */
 object EulerianPathCircuit {
 
+    /**
+     * Time Complexity: O(V + E) — connectivity check plus degree checks
+     * Space Complexity: O(V)
+     */
     fun hasEulerianCircuit(graph: Map<Int, List<Int>>): Boolean {
         if (!isConnectedIgnoringZeroDegree(graph)) return false
         // All vertices have even degree
         return graph.keys.all { (graph[it]?.size ?: 0) % 2 == 0 }
     }
 
+    /**
+     * Time Complexity: O(V + E) — connectivity check plus degree checks
+     * Space Complexity: O(V)
+     */
     fun hasEulerianPath(graph: Map<Int, List<Int>>): Boolean {
         if (!isConnectedIgnoringZeroDegree(graph)) return false
         // Exactly 0 or 2 vertices have odd degree
@@ -20,7 +28,11 @@ object EulerianPathCircuit {
         return odd == 0 || odd == 2
     }
 
-    // Returns Eulerian path/circuit if exists (list of vertices in order)
+    /**
+     * Returns Eulerian path/circuit if exists (list of vertices in order).
+     * Time Complexity: O(E) using Hierholzer's algorithm
+     * Space Complexity: O(E)
+     */
     fun eulerianTrail(graph: Map<Int, MutableList<Int>>): List<Int> {
         val degreesOdd = graph.filter { (it.value.size % 2) == 1 }.keys
         val start = degreesOdd.firstOrNull() ?: graph.keys.firstOrNull() ?: return emptyList()

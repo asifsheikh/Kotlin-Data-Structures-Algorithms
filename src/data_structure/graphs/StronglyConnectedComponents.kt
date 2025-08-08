@@ -14,6 +14,10 @@ package data_structure.graphs
 object StronglyConnectedComponents {
 
     // ===== TARJAN'S SCC =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V) for stacks and index/lowlink maps
+     */
     fun tarjanSCC(graph: Map<Int, List<Int>>): List<List<Int>> {
         val indexByNode = mutableMapOf<Int, Int>()
         val lowlinkByNode = mutableMapOf<Int, Int>()
@@ -61,6 +65,10 @@ object StronglyConnectedComponents {
     }
 
     // ===== KOSARAJU'S SCC =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V + E) for reverse graph construction
+     */
     fun kosarajuSCC(graph: Map<Int, List<Int>>): List<List<Int>> {
         val visited = mutableSetOf<Int>()
         val order = mutableListOf<Int>()
@@ -109,6 +117,10 @@ object StronglyConnectedComponents {
     }
 
     // ===== CONDENSATION DAG (SCC DAG) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V + E)
+     */
     fun condensationDAG(graph: Map<Int, List<Int>>, sccs: List<List<Int>>): Map<Int, List<Int>> {
         val nodeToComp = mutableMapOf<Int, Int>()
         for ((compId, comp) in sccs.withIndex()) {

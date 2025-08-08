@@ -11,6 +11,10 @@ package data_structure.graphs
 object BipartiteAndMatching {
 
     // ===== BIPARTITE CHECK (BFS coloring) =====
+    /**
+     * Time Complexity: O(V + E)
+     * Space Complexity: O(V)
+     */
     fun isBipartite(graph: Map<Int, List<Int>>): Boolean {
         val color = mutableMapOf<Int, Int>() // 0 or 1
         for (start in graph.keys) {
@@ -37,6 +41,10 @@ object BipartiteAndMatching {
     // ===== HOPCROFT–KARP MAXIMUM MATCHING =====
     // Left partition U = 0..(nLeft-1); Right partition V = 0..(nRight-1)
     // edges: adjacency from U to V
+    /**
+     * Time Complexity: O(E * sqrt(V))
+     * Space Complexity: O(V + E)
+     */
     fun hopcroftKarp(nLeft: Int, nRight: Int, edges: Map<Int, List<Int>>): Int {
         val dist = IntArray(nLeft) { -1 }
         val matchU = IntArray(nLeft) { -1 }

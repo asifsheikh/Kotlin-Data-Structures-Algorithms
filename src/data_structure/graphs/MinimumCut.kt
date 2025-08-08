@@ -10,6 +10,10 @@ object MinimumCut {
     data class CutResult(val maxFlow: Int, val minCutSetS: Set<Int>, val minCutSetT: Set<Int>)
 
     // capacity is adjacency matrix; returns min-cut partition after max flow
+    /**
+     * Time Complexity: O(V * E^2) using Edmonds–Karp for max-flow; plus O(V + E) to extract the cut
+     * Space Complexity: O(V^2) for residual capacities
+     */
     fun minCut(capacity: Array<IntArray>, source: Int, sink: Int): CutResult {
         val n = capacity.size
         val residual = Array(n) { IntArray(n) }
